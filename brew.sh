@@ -16,6 +16,4 @@ brew install nvim
 brew install ripgrep
 brew install fzf
 brew install direnv
-brew install pyenv
-brew install starship
 brew install jq

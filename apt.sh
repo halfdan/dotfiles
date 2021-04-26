@@ -8,7 +8,7 @@ apt update
 # Upgrade already installed packages
 apt upgrade
 
-# Install packages
+# Install packages (this works on Ubuntu 20.04+)
 apt install -y \
     jq \
     neovim \

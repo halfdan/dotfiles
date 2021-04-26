@@ -3,7 +3,6 @@ ZSH_THEME="robbyrussell"
 
 # Plugins
 plugins=(
-  poetry
   git
   zsh-autosuggestions
 )
