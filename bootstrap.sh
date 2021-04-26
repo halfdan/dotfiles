@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 # Install asdf-vm
 git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.8.0
 
