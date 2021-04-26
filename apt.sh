@@ -15,4 +15,4 @@ apt install -y \
     ripgrep \
     fzf \
     direnv \
-
+    zsh
