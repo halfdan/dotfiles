@@ -1,0 +1,36 @@
+# Oh My ZSH
+ZSH_THEME="robbyrussell"
+
+# Plugins
+plugins=(
+  poetry
+  git
+  zsh-autosuggestions
+)
+
+export ZSH=$HOME/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH"
+export PATH=$PATH:~/.local/bin
+
+# history
+HISTFILE=~/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+
+# completion
+autoload -Uz compinit
+compinit
+setopt COMPLETE_ALIASES
+
+# goodies
+eval "$(direnv hook zsh)"
+eval "$(pyenv init -)"
+eval "$(starship init zsh)"
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

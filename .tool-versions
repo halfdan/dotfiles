@@ -1,0 +1,7 @@
+elixir 1.6
+kubectl 1.18.2
+helm 2.9.1
+eksctl 0.2.1
+terraform 0.14.6
+terragrunt 0.23.31
+kustomize 3.10.0
