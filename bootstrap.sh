@@ -21,6 +21,7 @@ ln -s ~/.dotfiles/.zshenv .zshenv
 ln -s ~/.dotfiles/.tool-versions .tool-versions
 ln -s ~/.dotfiles/.tmux.conf .tmux.conf
 ln -s ~/.dotfiles/.vim .vim
+ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
 
 # Source zsh
 source ~/.zshrc
