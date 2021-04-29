@@ -1,0 +1,30 @@
+set background=dark
+set clipboard+=unnamedplus
+" set colorcolumn=80
+set ignorecase smartcase
+set incsearch
+set list listchars=tab:⇒\ ,trail:·
+set mouse+=a
+set noswapfile
+set nowrap
+set number
+set relativenumber
+set scrolloff=8
+set termguicolors
+
+" hide mode as it's shown in lightline
+set noshowmode
+
+syntax on
+
+" open new split panes to right and below (as you probably expect)
+set splitright
+set splitbelow
+
+" colorscheme nord
+" colorscheme dracula
+colorscheme challenger_deep
+
+
+" terminal disable linenumber
+au TermOpen * setlocal nonumber norelativenumber
