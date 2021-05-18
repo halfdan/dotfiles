@@ -18,6 +18,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.poetry/bin:$PATH"
 export PATH=$PATH:~/.local/bin
+export PATH=/usr/local/bin/:$PATH
 
 # history
 HISTFILE=~/.zhistory

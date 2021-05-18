@@ -21,6 +21,8 @@ alias s3="aws s3"
 alias kg="kubectl get "
 alias kd="kubectl describe "
 alias ke="kubectl edit "
+alias ctx="kubectx"
+alias ctl="kubectl"
 
 # zsh-autosuggest
 bindkey '^ ' autosuggest-accept
