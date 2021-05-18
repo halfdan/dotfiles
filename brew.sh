@@ -17,3 +17,4 @@ brew install ripgrep
 brew install fzf
 brew install direnv
 brew install jq
+brew install ctags
