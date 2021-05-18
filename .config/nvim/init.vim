@@ -2,21 +2,21 @@
 call plug#begin()
 
 Plug 'airblade/vim-gitgutter'
-Plug 'andymass/vim-matchup'
+" Plug 'andymass/vim-matchup'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+
 Plug 'junegunn/vim-easy-align'
+
+" Multiple cursors for editing
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'edkolev/tmuxline.vim'
 
 Plug 'majutsushi/tagbar'
-let g:tagbar_ctags_bin = '/usr/local/Cellar/universal-ctags/HEAD-b743975/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
@@ -42,6 +42,13 @@ let g:sneak#label = 1
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 100
 
+" Easy commenting for Vim
+Plug 'preservim/nerdcommenter'
+
+" Command line fuzzy finder / also provides :Maps
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
 " NERD Tree - tree explorer
 " https://github.com/scrooloose/nerdtree
 " http://usevim.com/2012/07/18/nerdtree/
@@ -49,14 +56,25 @@ let g:highlightedyank_highlight_duration = 100
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " nerdtree-git-plugin - show git status in NERD Tree
-" https://github.com/Xuyuanp/nerdtree-git-plugin
+" https://github.com/Xuyuanp/nerdtree-git-plugi
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " Enforce editor settings
 " https://github.com/editorconfig/editorconfig-vim
 Plug 'editorconfig/editorconfig-vim'
 
-" languages
+" Terminal in floating window
+Plug 'voldikss/vim-floaterm'
+
+" Telescope fuzzy find files/grep
+Plug 'nvim-lua/popup.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
+
+"""""""""""""""""""""""""
+" => Language Support
+"""""""""""""""""""""""""
 Plug 'neoclide/jsonc.vim'
 
 Plug 'vim-python/python-syntax'
@@ -64,6 +82,9 @@ let g:python_highlight_all = 1
 
 Plug 'JuliaEditorSupport/julia-vim'
 let g:latex_to_unicode_auto = 1
+
+" Formatting Julia Files
+Plug 'kdheepak/JuliaFormatter.vim'
 
 " themes & colorschemes
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
@@ -77,3 +98,26 @@ let g:nord_italic_comments = 1
 
 call plug#end()
 
+
+""""""""""""""""""""""""""""""
+" PLUGIN SETTINGS
+""""""""""""""""""""""""""""""
+
+
+""""""""""""""""""""""""""""""
+" VIM-FLOATERM
+""""""""""""""""""""""""""""""
+
+let g:floaterm_open_command = 'vsplit'
+
+"""""""""""""""""""""
+"JULIA FORMATTER
+"""""""""""""""""""""
+
+let g:JuliaFormatter_options = {
+        \ 'indent'                    : 4,
+        \ 'margin'                    : 92,
+        \ 'always_for_in'             : v:false,
+        \ 'whitespace_typedefs'       : v:false,
+        \ 'whitespace_ops_in_indices' : v:true,
+        \ }

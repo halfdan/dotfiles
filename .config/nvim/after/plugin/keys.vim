@@ -86,13 +86,25 @@ if !exists('g:vscode')
     " list and select buffer
     nnoremap <silent> <leader>bg :ls<CR>:buffer<Space>
 
+    " TELESCOPE
+    " Find files using Telescope command-line sugar.
+    nnoremap <leader>ff <cmd>Telescope find_files<cr>
+    nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+
+    " Maps display of current buffers 
+    nnoremap <C-b> <cmd>Telescope buffers<cr>
+    nnoremap <leader>fb <cmd>Telescope buffers<cr>
+    nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+    " Telescope project
+    nnoremap <silent> <leader>fp :Telescope project<CR>
 
     " Start terminal in insert mode
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    nnoremap <silent> <leader>tt :terminal<CR>
-    nnoremap <silent> <leader>tv :vnew<CR>:terminal<CR>
-    nnoremap <silent> <leader>th :new<CR>:terminal<CR>
-    tnoremap <C-x> <C-\><C-n><C-w>q
+    " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    " nnoremap <silent> <leader>tt :terminal<CR>
+    " nnoremap <silent> <leader>tv :vnew<CR>:terminal<CR>
+    " nnoremap <silent> <leader>th :new<CR>:terminal<CR>
+    " tnoremap <C-x> <C-\><C-n><C-w>q
 
 
     let s:hidden_all = 0
@@ -119,5 +131,30 @@ if !exists('g:vscode')
         endif
     endfunction
 
-    nnoremap <silent> <leader>h :call ToggleHiddenAll()<CR>
+    " nnoremap <silent> <leader>h :call ToggleHiddenAll()<CR>
+
+    nnoremap   <silent>   <F9>    :FloatermNew --height=0.4 --width=0.98 --wintype=floating --position=bottom --autoclose=2 --title=
+    tnoremap   <silent>   <F9>    <C-\><C-n>:FloatermNew --height=0.4 --width=0.98 --wintype=floating --position=bottom --autoclose=2 --title=
+    nnoremap   <silent>   <F8>    :FloatermPrev<CR>
+    tnoremap   <silent>   <F8>    <C-\><C-n>:FloatermPrev<CR>
+    nnoremap   <silent>   <F10>    :FloatermNext<CR>
+    tnoremap   <silent>   <F10>    <C-\><C-n>:FloatermNext<CR>
+    inoremap   <silent>   <F11>   <C-c>:FloatermToggle<CR>
+    nnoremap   <silent>   <F11>   :FloatermToggle<CR>
+    tnoremap   <silent>   <F11>   <C-\><C-n>:FloatermToggle<CR>
+    tnoremap   <silent>   <M-o>   <C-\><C-n><CR>
+    nnoremap   <C-c><C-c> :FloatermSend<CR>
+    vnoremap   <C-c><C-c> :FloatermSend<CR>
+
+    " Automatic formatting for Julia files
+    autocmd FileType julia nnoremap <buffer> <c-f> :JuliaFormatterFormat<cr>
+
+    " Maps quit
+    noremap <leader>q :q<cr>
+
+    " Maps quit all  
+    noremap <c-q> :qa<cr>
+
+    " Maps write
+    nnoremap <leader>w :w<cr>
 end

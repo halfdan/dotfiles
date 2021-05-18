@@ -12,6 +12,9 @@ set relativenumber
 set scrolloff=8
 set termguicolors
 
+" Set tabstop and shiftwidth to 4 spaces
+set expandtab ts=4 sw=4 ai
+
 " hide mode as it's shown in lightline
 set noshowmode
 
