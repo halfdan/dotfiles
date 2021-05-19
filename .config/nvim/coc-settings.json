@@ -18,5 +18,23 @@
     "vue",
     "xml"
   ],
-  "languageserver": {}
+  "languageserver": {
+    "go": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "trace.server": "verbose",
+      "filetypes": [
+        "go"
+      ]
+    }
+  },
+  "python.formatting.provider": "black",
+  "python.formatting.blackArgs": [
+    "--line-length",
+    "120"
+  ],
+  "python.linting.flake8Enabled": true,
+  "pyright.enable": true
 }

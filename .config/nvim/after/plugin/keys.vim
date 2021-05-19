@@ -1,5 +1,5 @@
 " Keybindings
-let mapleader=";" 
+let mapleader=" " 
 
 " use ;; for escape
 " http://vim.wikia.com/wiki/Avoid_the_escape_key
@@ -17,13 +17,23 @@ nnoremap <leader>j <C-w>j
 nnoremap <leader>k <C-w>k
 nnoremap <leader>l <C-w>l
 
+" Change 2 split windows from vert to horiz or horiz to vert
+map <leader>th <C-w>t<C-w>H
+map <leader>tk <C-w>t<C-w>K
+
+" Make adjusting split sizes a bit more friendly
+noremap <silent> <C-Left> :vertical resize +3<CR>
+noremap <silent> <C-Right> :vertical resize -3<CR>
+noremap <silent> <C-Up> :resize +3<CR>
+noremap <silent> <C-Down> :resize -3<CR>
+
 " improved keyboard support for navigation (especially terminal)
 " http://neovim.io/doc/user/nvim_terminal_emulator.html
-tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-n><C-w>h
-tnoremap <A-j> <C-\><C-n><C-w>j
-tnoremap <A-k> <C-\><C-n><C-w>k
-tnoremap <A-l> <C-\><C-n><C-w>l
+" tnoremap <Esc> <C-\><C-n>
+" tnoremap <A-h> <C-\><C-n><C-w>h
+" tnoremap <A-j> <C-\><C-n><C-w>j
+" tnoremap <A-k> <C-\><C-n><C-w>k
+" tnoremap <A-l> <C-\><C-n><C-w>l
 nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
@@ -31,11 +41,11 @@ nnoremap <A-l> <C-w>l
 
 if !exists('g:vscode')
     " Auto start NERD tree when opening a directory
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
+    " autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | wincmd p | endif
 
     " Auto start NERD tree if no files are specified
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
+    " autocmd StdinReadPre * let s:std_in=1
+    " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | exe 'NERDTree' | endif
 
     " Let quit work as expected if after entering :q the only window left open is NERD Tree itself
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -52,7 +62,7 @@ if !exists('g:vscode')
     " http://stackoverflow.com/questions/7722177/how-do-i-map-ctrl-x-ctrl-o-to-ctrl-space-in-terminal-vim#answer-24550772
     "nnoremap <C-Space> :NERDTreeToggle<CR>
     "nmap <C-@> <C-Space>
-    nnoremap <silent> <Space> :NERDTreeToggle<CR>
+    nnoremap <silent> <M-b> :NERDTreeToggle<CR>
 
     " toggle tagbar
     nnoremap <silent> <leader>tb :TagbarToggle<CR>
@@ -98,14 +108,6 @@ if !exists('g:vscode')
 
     " Telescope project
     nnoremap <silent> <leader>fp :Telescope project<CR>
-
-    " Start terminal in insert mode
-    " au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-    " nnoremap <silent> <leader>tt :terminal<CR>
-    " nnoremap <silent> <leader>tv :vnew<CR>:terminal<CR>
-    " nnoremap <silent> <leader>th :new<CR>:terminal<CR>
-    " tnoremap <C-x> <C-\><C-n><C-w>q
-
 
     let s:hidden_all = 0
     function! ToggleHiddenAll()

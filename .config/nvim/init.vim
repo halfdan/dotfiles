@@ -45,15 +45,16 @@ let g:highlightedyank_highlight_duration = 100
 " Easy commenting for Vim
 Plug 'preservim/nerdcommenter'
 
-" Command line fuzzy finder / also provides :Maps
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+" Indentation lines
+Plug 'Yggdroot/indentLine'
+Plug 'lukas-reineke/indent-blankline.nvim'
 
 " NERD Tree - tree explorer
 " https://github.com/scrooloose/nerdtree
 " http://usevim.com/2012/07/18/nerdtree/
 " (loaded on first invocation of the command)
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'ryanoasis/vim-devicons'
 
 " nerdtree-git-plugin - show git status in NERD Tree
 " https://github.com/Xuyuanp/nerdtree-git-plugi
@@ -95,6 +96,8 @@ let g:nord_cursor_line_number_background = 1
 let g:nord_bold = 1
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
+
+Plug 'shaunsingh/moonlight.nvim'
 
 call plug#end()
 

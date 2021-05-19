@@ -26,8 +26,7 @@ set splitbelow
 
 " colorscheme nord
 " colorscheme dracula
-colorscheme challenger_deep
-
+colorscheme moonlight
 
 " terminal disable linenumber
 au TermOpen * setlocal nonumber norelativenumber
