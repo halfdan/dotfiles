@@ -4,7 +4,6 @@ require('settings')
 -- Convert to lua
 vim.cmd('source ~/.config/nvim/vim-plug/plugins.vim')
 
-
 require('colorscheme')
 
 require('lsp')

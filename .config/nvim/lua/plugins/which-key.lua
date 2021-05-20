@@ -108,7 +108,11 @@ local mappings = {
         R = {"<cmd>Telescope registers<cr>", "Registers"},
         t = {"<cmd>Telescope live_grep<cr>", "Text"}
     },
-    S = {name = "+Session", s = {"<cmd>SessionSave<cr>", "Save Session"}, l = {"<cmd>SessionLoad<cr>", "Load Session"}}
+    S = {
+        name = "+Session", 
+        s = {"<cmd>SessionSave<cr>", "Save Session"}, 
+        l = {"<cmd>SessionLoad<cr>", "Load Session"}
+    }
 }
 
 local wk = require("which-key")

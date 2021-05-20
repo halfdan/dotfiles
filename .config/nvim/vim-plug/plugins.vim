@@ -43,9 +43,6 @@ call plug#begin()
 	" Easy commenting for Vim
 	Plug 'preservim/nerdcommenter'
 
-	" Dashboard
-	Plug 'glepnir/dashboard-nvim'
-
 	" NERD Tree - tree explorer
 	" https://github.com/scrooloose/nerdtree
 	" http://usevim.com/2012/07/18/nerdtree/
@@ -55,7 +52,7 @@ call plug#begin()
 
 	" nerdtree-git-plugin - show git status in NERD Tree
 	" https://github.com/Xuyuanp/nerdtree-git-plugi
-	Plug 'Xuyuanp/nerdtree-git-plugin'
+	" Plug 'Xuyuanp/nerdtree-git-plugin'
 
 	" Enforce editor settings
 	" https://github.com/editorconfig/editorconfig-vim
@@ -65,6 +62,7 @@ call plug#begin()
     Plug 'neovim/nvim-lspconfig'
 	Plug 'hrsh7th/nvim-compe'
 	Plug 'glepnir/lspsaga.nvim'
+    Plug 'kabouzeid/nvim-lspinstall'
 
 	" Terminal in floating window
 	Plug 'voldikss/vim-floaterm'
