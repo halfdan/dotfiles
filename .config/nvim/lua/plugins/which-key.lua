@@ -50,18 +50,25 @@ vim.g.mapleader = ' '
 -- explorer
 vim.api.nvim_set_keymap('n', '<Leader>e', ':NERDTreeToggle<CR>', {noremap = true, silent = true})
 
--- dashboard
-vim.api.nvim_set_keymap('n', '<Leader>;', ':Dashboard<CR>', {noremap = true, silent = true})
-
 -- TODO create entire treesitter section
 
 local mappings = {
-    ["/"] = "Comment",
     ["e"] = "Explorer",
-    f = {
-        f = {":Telescope find_files<CR>", "Find File"}
+    ["c"] = "NERDCommenter",
+    b = {
+        name = "+Buffers",
+        b = {"<C-^>", "Toggle Buffer"},
+        d = {"<cmd>bd<cr>", "Close Buffer"},
+        k = {"<cmd>bd!<cr>", "Kill Buffer"},
     },
-    ["f"] = "Find File",
+    f = {
+        name = "Find",
+        f = {"<cmd>Telescope find_files<cr>", "Find File"},
+        p = {"<cmd>lua require'telescope'.extensions.project.project{}<CR>", "Project"},
+        g = {"<cmd>lua require'telescope.builtin'.live_grep()<cr>", "Grep files"},
+        b = {"<cmd>lua require'telescope.builtin'.buffers{}<cr>", "Buffers"},
+        t = {"<cmd>lua require'telescope.builtin'.help_tags{}<cr>", "Tags"},
+    },
     g = {
         name = "+Git",
         j = {"<cmd>NextHunk<cr>", "Next Hunk"},
@@ -94,7 +101,9 @@ local mappings = {
         s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
         S = {"<cmd>Telescope lsp_workspace_symbols<cr>", "Workspace Symbols"}
     },
-
+    d = {
+        f = {":lua require'functions'.edit_dotfiles()<cr>", "Dotfiles search"}
+    },
     s = {
         name = "+Search",
         b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
@@ -112,6 +121,10 @@ local mappings = {
         name = "+Session", 
         s = {"<cmd>SessionSave<cr>", "Save Session"}, 
         l = {"<cmd>SessionLoad<cr>", "Load Session"}
+    },
+    t = {
+        name = "+Tagbar",
+        t = {"<cmd>TagbarToggle<cr>", "Toggle Tagbar"},
     }
 }
 
