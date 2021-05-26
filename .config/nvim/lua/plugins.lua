@@ -44,12 +44,12 @@ return require("packer").startup(
         use {'junegunn/vim-easy-align'}
 
         -- Multiple cursors for editing
-        use {'mg979/vim-visual-multi', branch='master'}
+        --use {'mg979/vim-visual-multi', branch='master'}
 
         -- Goodies
         use {'tpope/vim-abolish'}
         use {'tpope/vim-fugitive'}
-        use {'tpope/vim-surround'}
+        use {'tpope/vim-surround'} -- ✅
 
         -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
@@ -58,8 +58,6 @@ return require("packer").startup(
         vim.g.tagbar_ctags_bin = '/usr/local/bin/ctags'
 
         -- Status Line and Bufferline
-        -- use {"glepnir/galaxyline.nvim"}
-        --use {"romgrk/barbar.nvim"}
         use {
             'hoob3rt/lualine.nvim',
             requires = {'kyazdani42/nvim-web-devicons'}
@@ -123,6 +121,7 @@ return require("packer").startup(
         -- themes & colorschemes
         use {'challenger-deep-theme/vim', as='challenger-deep' }
         use {'dracula/vim', as='dracula' }
+        use { "briones-gabriel/darcula-solid.nvim", requires = "rktjmp/lush.nvim" }
         use {'shaunsingh/moonlight.nvim', as='moonlight'}
         use {'tanvirtin/monokai.nvim'}
         use {'arcticicestudio/nord-vim'}

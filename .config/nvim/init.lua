@@ -16,6 +16,7 @@ require('lsp.terraform-ls')
 
 require('plugins.telescope')
 require('plugins.telescope-project')
+require('plugins.treesitter')
 require('plugins.compe')
 require('plugins.which-key')
 require('plugins.lualine')
