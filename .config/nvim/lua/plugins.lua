@@ -124,7 +124,7 @@ return require("packer").startup(
         use {'challenger-deep-theme/vim', as='challenger-deep' }
         use {'dracula/vim', as='dracula' }
         use {'shaunsingh/moonlight.nvim', as='moonlight'}
-
+        use {'tanvirtin/monokai.nvim'}
         use {'arcticicestudio/nord-vim'}
 
         require_plugin('julia-vim')
