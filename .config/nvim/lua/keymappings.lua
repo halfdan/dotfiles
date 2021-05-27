@@ -2,6 +2,7 @@ vim.g.mapleader = ' '
 
 -- TODO find better place
 vim.g.floaterm_open_command = 'vsplit'
+--vim.g.floaterm_position = 'bottom'
 
 -- better window movement
 vim.api.nvim_set_keymap('n', '<C-h>', '<C-w>h', {silent = true})

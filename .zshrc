@@ -4,7 +4,7 @@ ZSH_THEME="robbyrussell"
 # Plugins
 plugins=(
   git
-  zsh-autosuggestions
+#  zsh-autosuggestions
 )
 
 export ZSH=$HOME/.oh-my-zsh
@@ -26,9 +26,9 @@ HISTSIZE=10000
 SAVEHIST=10000
 
 # completion
-autoload -Uz compinit
-compinit
-setopt COMPLETE_ALIASES
+#autoload -Uz compinit
+#compinit
+#setopt COMPLETE_ALIASES
 
 # goodies
 eval "$(direnv hook zsh)"

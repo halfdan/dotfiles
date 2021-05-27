@@ -119,12 +119,11 @@ return require("packer").startup(
         use {'kdheepak/JuliaFormatter.vim'}
 
         -- themes & colorschemes
-        use {'challenger-deep-theme/vim', as='challenger-deep' }
         use {'dracula/vim', as='dracula' }
         use { "briones-gabriel/darcula-solid.nvim", requires = "rktjmp/lush.nvim" }
         use {'shaunsingh/moonlight.nvim', as='moonlight'}
-        use {'tanvirtin/monokai.nvim'}
         use {'arcticicestudio/nord-vim'}
+        use {'joshdick/onedark.vim'}
 
         require_plugin('julia-vim')
     end
