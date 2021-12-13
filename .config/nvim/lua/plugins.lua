@@ -43,23 +43,19 @@ return require("packer").startup(
 
         use {'junegunn/vim-easy-align'}
 
-        -- Multiple cursors for editing
-        --use {'mg979/vim-visual-multi', branch='master'}
-
         -- Goodies
-        use {'tpope/vim-abolish'}
         use {'tpope/vim-fugitive'}
         use {'tpope/vim-surround'} -- ✅
 
         -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
 
-        use {'majutsushi/tagbar'}
+        use {'preservim/tagbar'}
         vim.g.tagbar_ctags_bin = '/usr/local/bin/ctags'
 
         -- Status Line and Bufferline
         use {
-            'hoob3rt/lualine.nvim',
+            'nvim-lualine/lualine.nvim',
             requires = {'kyazdani42/nvim-web-devicons'}
         }
 
@@ -77,7 +73,7 @@ return require("packer").startup(
         -- http://usevim.com/2012/07/18/nerdtree/
         -- (loaded on first invocation of the command)
         use {
-            'scrooloose/nerdtree', 
+            'preservim/nerdtree', 
             requires = {'ryanoasis/vim-devicons'}
         }
 
@@ -88,8 +84,16 @@ return require("packer").startup(
 
         -- LSP / Language Server Protocol
         use {'neovim/nvim-lspconfig'}
-        use {'hrsh7th/nvim-compe'}
-        use {'glepnir/lspsaga.nvim'}
+        --use {'hrsh7th/nvim-compe'}
+        
+        use {'hrsh7th/cmp-nvim-lsp'}
+        use {'hrsh7th/cmp-buffer'}
+        use {'hrsh7th/cmp-path'}
+        use {'hrsh7th/cmp-cmdline'}
+        use {'hrsh7th/nvim-cmp'}
+        
+        -- use {'glepnir/lspsaga.nvim'}
+        use {'tami5/lspsaga.nvim'}
         use {'kabouzeid/nvim-lspinstall'}
         use {'nvim-lua/lsp-status.nvim'}
         use {'simrat39/symbols-outline.nvim'}
