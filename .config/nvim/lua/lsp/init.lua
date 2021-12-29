@@ -37,7 +37,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     virtual_text = {
       prefix = "",
-      spacing = 0,
+      spacing = 1,
     },
     signs = true,
     underline = true,
@@ -73,12 +73,7 @@ vim.lsp.protocol.CompletionItemKind = {
     "   (TypeParameter)"
 }
 
---[[ " autoformat
-autocmd BufWritePre *.js lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.jsx lua vim.lsp.buf.formatting_sync(nil, 100)
-autocmd BufWritePre *.lua lua vim.lsp.buf.formatting_sync(nil, 100) ]]
--- Java
--- autocmd FileType java nnoremap ca <Cmd>lua require('jdtls').code_action()<CR>
+vim.cmd("autocmd BufWritePre *.go :silent! lua require('go.format').gofmt()")
 
 local function documentHighlight(client, bufnr)
     -- Set autocommands conditional on server_capabilities

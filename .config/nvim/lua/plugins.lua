@@ -92,7 +92,7 @@ return require("packer").startup(
         use {'hrsh7th/cmp-cmdline'}
         use {'hrsh7th/nvim-cmp'}
         
-        -- use {'glepnir/lspsaga.nvim'}
+        -- use {'glepnir/lspsaga.nvim'} -- Has a bug
         use {'tami5/lspsaga.nvim'}
         use {'kabouzeid/nvim-lspinstall'}
         use {'nvim-lua/lsp-status.nvim'}
@@ -113,6 +113,8 @@ return require("packer").startup(
         -- => Language Support
         use {'neoclide/jsonc.vim'}
 
+        use {'ray-x/go.nvim'}
+
         -- use {'vim-python/python-syntax', ft={'python'}, opt=true}
         -- let g:python_highlight_all = 1
 
@@ -128,6 +130,7 @@ return require("packer").startup(
         use {'shaunsingh/moonlight.nvim', as='moonlight'}
         use {'arcticicestudio/nord-vim'}
         use {'joshdick/onedark.vim'}
+        use {'sainnhe/everforest'}
 
         require_plugin('julia-vim')
     end
