@@ -83,7 +83,10 @@ return require("packer").startup(
 
 
         -- LSP / Language Server Protocol
-        use {'neovim/nvim-lspconfig'}
+        use {
+            'neovim/nvim-lspconfig',
+            'williamboman/nvim-lsp-installer',
+        }
         --use {'hrsh7th/nvim-compe'}
         
         use {'hrsh7th/cmp-nvim-lsp'}
@@ -94,7 +97,7 @@ return require("packer").startup(
         
         -- use {'glepnir/lspsaga.nvim'} -- Has a bug
         use {'tami5/lspsaga.nvim'}
-        use {'kabouzeid/nvim-lspinstall'}
+
         use {'nvim-lua/lsp-status.nvim'}
         use {'simrat39/symbols-outline.nvim'}
 
@@ -114,7 +117,10 @@ return require("packer").startup(
         use {'neoclide/jsonc.vim'}
 
         use {'ray-x/go.nvim'}
+        use {'ray-x/guihua.lua'}
 
+        -- Debugger support via dap
+        use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
         -- use {'vim-python/python-syntax', ft={'python'}, opt=true}
         -- let g:python_highlight_all = 1
 
