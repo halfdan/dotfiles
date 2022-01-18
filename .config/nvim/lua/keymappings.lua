@@ -99,19 +99,4 @@ vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silen
 vim.api.nvim_set_keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
 
-
--- vim.cmd([[
---     if !exists('g:vscode')
---         " Automatic formatting for Julia files
---         autocmd FileType julia nnoremap <buffer> <c-f> :JuliaFormatterFormat<cr>
-
---         " Maps quit
---         noremap <leader>q :q<cr>
-
---         " Maps quit all  
---         noremap <c-q> :qa<cr>
-
---         " Maps write
---         nnoremap <leader>w :w<cr>
---     end
--- ]])
+vim.api.nvim_set_keymap('n', 'Q', '<Nop>', {noremap = true, silent = true})
