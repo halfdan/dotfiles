@@ -68,61 +68,43 @@ return require("packer").startup(
         -- Easy commenting for Vim
         use {'preservim/nerdcommenter'}
 
-        -- NERD Tree - tree explorer
-        -- https://github.com/scrooloose/nerdtree
-        -- http://usevim.com/2012/07/18/nerdtree/
-        -- (loaded on first invocation of the command)
-        use {
-            'preservim/nerdtree', 
-            requires = {'ryanoasis/vim-devicons'}
-        }
-
-        -- nerdtree-git-plugin - show git status in NERD Tree
-        -- https://github.com/Xuyuanp/nerdtree-git-plugi
-        use {'Xuyuanp/nerdtree-git-plugin'}
-
-
         -- LSP / Language Server Protocol
         use {
             'neovim/nvim-lspconfig',
             'williamboman/nvim-lsp-installer',
         }
-        --use {'hrsh7th/nvim-compe'}
         
         use {'hrsh7th/cmp-nvim-lsp'}
         use {'hrsh7th/cmp-buffer'}
         use {'hrsh7th/cmp-path'}
         use {'hrsh7th/cmp-cmdline'}
         use {'hrsh7th/nvim-cmp'}
+        use {'tzachar/cmp-tabnine', run = './install.sh'}
+        use {'onsails/lspkind-nvim'} -- Display symbol with cmp suggestions
         
-        -- use {'glepnir/lspsaga.nvim'} -- Has a bug
         use {'tami5/lspsaga.nvim'}
 
         use {'nvim-lua/lsp-status.nvim'}
-        use {'simrat39/symbols-outline.nvim'}
 
-        -- Terminal in floating window
-        use {'voldikss/vim-floaterm'}
+        --use {'simrat39/symbols-outline.nvim'}
+        use {'marcuscaisey/symbols-outline.nvim', branch = 'relative-width'}
 
         -- Telescope fuzzy find files/grep
         use {'nvim-lua/popup.nvim'}
         use {'nvim-lua/plenary.nvim'}
         use {'nvim-telescope/telescope.nvim'}
         use {'nvim-telescope/telescope-project.nvim'}
+        use {'nvim-telescope/telescope-fzy-native.nvim'}
 
-        -- Which Key
-        use {'folke/which-key.nvim'}
+        use {'theprimeagen/git-worktree.nvim'}
 
         -- => Language Support
         use {'neoclide/jsonc.vim'}
 
-        use {'ray-x/go.nvim'}
-        use {'ray-x/guihua.lua'}
+        use {'rust-lang/rust.vim'}
 
         -- Debugger support via dap
         use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-        -- use {'vim-python/python-syntax', ft={'python'}, opt=true}
-        -- let g:python_highlight_all = 1
 
         use {'JuliaEditorSupport/julia-vim', opt=true}
         vim.g.latex_to_unicode_auto = 1

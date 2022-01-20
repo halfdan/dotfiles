@@ -94,6 +94,11 @@ _G.packer_plugins = {
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
+  ["cmp-tabnine"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/cmp-tabnine",
+    url = "https://github.com/tzachar/cmp-tabnine"
+  },
   ["darcula-solid.nvim"] = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/darcula-solid.nvim",
@@ -109,10 +114,15 @@ _G.packer_plugins = {
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/editorconfig-vim",
     url = "https://github.com/editorconfig/editorconfig-vim"
   },
-  ["go.nvim"] = {
+  everforest = {
     loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/go.nvim",
-    url = "https://github.com/ray-x/go.nvim"
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/everforest",
+    url = "https://github.com/sainnhe/everforest"
+  },
+  ["git-worktree.nvim"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
+    url = "https://github.com/theprimeagen/git-worktree.nvim"
   },
   ["jsonc.vim"] = {
     loaded = true,
@@ -129,6 +139,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/lsp-status.nvim",
     url = "https://github.com/nvim-lua/lsp-status.nvim"
+  },
+  ["lspkind-nvim"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
+    url = "https://github.com/onsails/lspkind-nvim"
   },
   ["lspsaga.nvim"] = {
     loaded = true,
@@ -155,16 +170,6 @@ _G.packer_plugins = {
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nerdcommenter",
     url = "https://github.com/preservim/nerdcommenter"
   },
-  nerdtree = {
-    loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nerdtree",
-    url = "https://github.com/preservim/nerdtree"
-  },
-  ["nerdtree-git-plugin"] = {
-    loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nerdtree-git-plugin",
-    url = "https://github.com/Xuyuanp/nerdtree-git-plugin"
-  },
   ["nord-vim"] = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nord-vim",
@@ -175,15 +180,25 @@ _G.packer_plugins = {
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-dap"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nvim-dap",
+    url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
+  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-lspinstall"] = {
-    loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/nvim-lspinstall",
-    url = "https://github.com/kabouzeid/nvim-lspinstall"
   },
   ["nvim-treesitter"] = {
     loaded = true,
@@ -215,6 +230,11 @@ _G.packer_plugins = {
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/popup.nvim",
     url = "https://github.com/nvim-lua/popup.nvim"
   },
+  ["rust.vim"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/rust.vim",
+    url = "https://github.com/rust-lang/rust.vim"
+  },
   ["symbols-outline.nvim"] = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/symbols-outline.nvim",
@@ -224,6 +244,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/tagbar",
     url = "https://github.com/preservim/tagbar"
+  },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
   },
   ["telescope-project.nvim"] = {
     loaded = true,
@@ -235,20 +260,10 @@ _G.packer_plugins = {
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["vim-devicons"] = {
-    loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/vim-devicons",
-    url = "https://github.com/ryanoasis/vim-devicons"
-  },
   ["vim-easy-align"] = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/vim-easy-align",
     url = "https://github.com/junegunn/vim-easy-align"
-  },
-  ["vim-floaterm"] = {
-    loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/vim-floaterm",
-    url = "https://github.com/voldikss/vim-floaterm"
   },
   ["vim-fugitive"] = {
     loaded = true,
@@ -274,11 +289,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
-  },
-  ["which-key.nvim"] = {
-    loaded = true,
-    path = "/Users/fbecker18/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/folke/which-key.nvim"
   }
 }
 
