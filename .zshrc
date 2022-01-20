@@ -4,7 +4,7 @@ ZSH_THEME="robbyrussell"
 # Plugins
 plugins=(
   git
-#  zsh-autosuggestions
+  fzf
 )
 
 export ZSH=$HOME/.oh-my-zsh
@@ -12,7 +12,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Path settings
 export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+export PATH="$PYENV_ROOT/shims:$PATH"
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -32,7 +32,6 @@ SAVEHIST=10000
 
 # goodies
 eval "$(direnv hook zsh)"
-eval "$(pyenv init -)"
 eval "$(starship init zsh)"
 
 . $HOME/.asdf/asdf.sh
