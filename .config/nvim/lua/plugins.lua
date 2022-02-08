@@ -46,6 +46,11 @@ return require("packer").startup(
         -- Goodies
         use {'tpope/vim-fugitive'}
         use {'tpope/vim-surround'} -- ✅
+        use {'tpope/vim-dispatch'} 
+
+        -- Testing
+        use {'vim-test/vim-test'}
+
 
         -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
@@ -81,9 +86,12 @@ return require("packer").startup(
         use {'hrsh7th/nvim-cmp'}
         use {'tzachar/cmp-tabnine', run = './install.sh'}
         use {'onsails/lspkind-nvim'} -- Display symbol with cmp suggestions
+        use {'L3MON4D3/LuaSnip'} 
+        use {'saadparwaiz1/cmp_luasnip'}
         
         use {'tami5/lspsaga.nvim'}
 
+        -- Used to display LSP status in Lualine
         use {'nvim-lua/lsp-status.nvim'}
 
         --use {'simrat39/symbols-outline.nvim'}
@@ -102,6 +110,7 @@ return require("packer").startup(
         use {'neoclide/jsonc.vim'}
 
         use {'rust-lang/rust.vim'}
+        use {'simrat39/rust-tools.nvim'}
 
         -- Debugger support via dap
         use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
@@ -123,3 +132,4 @@ return require("packer").startup(
         require_plugin('julia-vim')
     end
 )
+

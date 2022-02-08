@@ -19,7 +19,7 @@ require('telescope').setup {
         file_ignore_patterns = {},
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
         shorten_path = true,
-    winblend = 0,
+        winblend = 0,
         width = 0.75,
         preview_cutoff = 120,
         results_height = 1,
@@ -32,7 +32,7 @@ require('telescope').setup {
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
         grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-
+        layout_strategy = "horizontal",
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
         mappings = {

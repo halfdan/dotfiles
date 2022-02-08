@@ -38,12 +38,6 @@ vim.cmd([[
 vim.api.nvim_set_keymap('v', '<', '<gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('v', '>', '>gv', {noremap = true, silent = true})
 
--- I hate escape
-vim.api.nvim_set_keymap('i', 'jk', '<ESC>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', 'kj', '<ESC>', {noremap = true, silent = true})
-vim.api.nvim_set_keymap('i', 'jj', '<ESC>', {noremap = true, silent = true})
-
-
 -- Tab switch buffer
 vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silent = true})
@@ -55,12 +49,11 @@ vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silen
 vim.api.nvim_set_keymap('n', 'Q', '<Nop>', {noremap = true, silent = true})
 
 -- Telescope
-vim.api.nvim_set_keymap('n', '<leader>ps', ':lua require(\'telescope.builtin\').grep_string({ search = vim.fn.input("Grep For > ")})<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-p>', ':lua require(\'telescope.builtin\').git_files()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<Leader>pf', ':lua require(\'telescope.builtin\').find_files()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fs', ':lua require(\'telescope.builtin\').grep_string({ search = vim.fn.input("Grep For > ")})<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<Leader>ff', ':lua require(\'telescope.builtin\').find_files()<CR>', {noremap = true})
 
-vim.api.nvim_set_keymap('n', '<leader>pw', ':lua require(\'telescope.builtin\').grep_string { search = vim.fn.expand("<cword>") }<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>pb', ':lua require(\'telescope.builtin\').buffers()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require(\'telescope.builtin\').grep_string { search = vim.fn.expand("<cword>") }<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fb', ':lua require(\'telescope.builtin\').buffers()<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>vh', ':lua require(\'telescope.builtin\').help_tags()<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>gw', ':lua require(\'telescope\').extensions.git_worktree.git_worktrees()<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>gm', ':lua require(\'telescope\').extensions.git_worktree.create_git_worktree()<CR>', {noremap = true})
@@ -69,6 +62,13 @@ vim.api.nvim_set_keymap('n', '<leader>gm', ':lua require(\'telescope\').extensio
 vim.api.nvim_set_keymap('n', '<Leader>tt', ':SymbolsOutline<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>hl', ':nohl<CR>', {noremap = true})
 
+-- Vim Test
+vim.api.nvim_set_keymap('n', '<leader>t', ':TestNearest<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>T', ':TestFile<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>a', ':TestSuite<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>l', ':TestLast<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>g', ':TestVisit<CR>', {noremap = true})
+
 -- LSP
 vim.cmd("nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>")
 vim.cmd("nnoremap <silent> gD <cmd>lua vim.lsp.buf.declaration()<CR>")
@@ -76,6 +76,9 @@ vim.cmd("nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>")
 vim.cmd("nnoremap <silent> gi <cmd>lua vim.lsp.buf.implementation()<CR>")
 vim.cmd("nnoremap <silent> ca :Lspsaga code_action<CR>")
 vim.cmd("nnoremap <silent> K :Lspsaga hover_doc<CR>")
+vim.cmd("nnoremap <silent> rn <cmd>lua vim.lsp.buf.rename()<CR>")
+vim.cmd("nnoremap <silent> ff <cmd>lua vim.lsp.buf.formatting()<CR>")
+
 vim.cmd('nnoremap <silent> <C-k> <cmd>lua vim.lsp.buf.signature_help()<CR>')
 vim.cmd("nnoremap <silent> <C-p> :Lspsaga diagnostic_jump_prev<CR>")
 vim.cmd("nnoremap <silent> <C-n> :Lspsaga diagnostic_jump_next<CR>")

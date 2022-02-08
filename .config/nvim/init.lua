@@ -6,13 +6,6 @@ require('plugins')
 require('colorscheme')
 
 require('lsp')
---require('lsp.docker-ls')
---require('lsp.python-ls')
---require('lsp.julia-ls')
---require('lsp.json-ls')
---require('lsp.elixir-ls')
---require('lsp.go-ls')
---require('lsp.terraform-ls')
 
 require('plugins.telescope')
 require('plugins.telescope-project')
@@ -24,3 +17,4 @@ require('plugins.sneak')
 
 require('themes.nord')
 
+require('autocmds')

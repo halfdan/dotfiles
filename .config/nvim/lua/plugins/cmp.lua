@@ -1,5 +1,6 @@
 local cmp = require'cmp'
 local lspkind = require('lspkind')
+local luasnip = require 'luasnip'
 
 local source_mapping = {
 	buffer = "[Buffer]",
@@ -19,18 +20,50 @@ cmp.setup({
     --     -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
     --     end,
     -- },
+    --mapping = {
+        --['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        --['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        --['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+        --['<CR>'] = cmp.mapping.confirm({ select = true }),
+    --},
+    snippet = {
+        expand = function(args)
+            require'luasnip'.lsp_expand(args.body)
+        end,
+    },
     mapping = {
-        ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-        ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<C-p>'] = cmp.mapping.select_prev_item(),
+        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end,
+        ['<S-Tab>'] = function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end,
     },
     sources = cmp.config.sources({
-            { name = 'cmp_tabnine' },
-            { name = 'nvim_lsp' },
-    },
-        {
-            { name = 'buffer' },
+        { name = 'cmp_tabnine' },
+        { name = 'nvim_lsp' },
     }),
     formatting = {
         format = function(entry, vim_item)
@@ -74,7 +107,7 @@ tabnine:setup({
 	snippet_placeholder = '..';
 	ignored_file_types = { -- default is not to ignore
 		-- uncomment to ignore in lua:
-		-- lua = true
+         lua = true
 	};
 })
 
