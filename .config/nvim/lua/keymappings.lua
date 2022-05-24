@@ -43,8 +43,8 @@ vim.api.nvim_set_keymap('n', '<TAB>', ':bnext<CR>', {noremap = true, silent = tr
 vim.api.nvim_set_keymap('n', '<S-TAB>', ':bprevious<CR>', {noremap = true, silent = true})
 
 -- Move selected line / block of text in visual mode
-vim.api.nvim_set_keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('x', 'J', ':move \'>+1<CR>gv-gv', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('x', 'K', ':move \'<-2<CR>gv-gv', {noremap = true, silent = true})
 
 vim.api.nvim_set_keymap('n', 'Q', '<Nop>', {noremap = true, silent = true})
 
@@ -88,3 +88,10 @@ vim.cmd("nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll
 vim.cmd("nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
 vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
 
+-- Yank until end of line
+vim.api.nvim_set_keymap('n', 'Y', 'yg$', {noremap = true, silent = true})
+-- Next item, but center line
+vim.api.nvim_set_keymap('n', 'n', 'nzzzv', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', 'N', 'Nzzzv', {noremap = true, silent = true})
+-- Join line but keep cursor intact
+vim.api.nvim_set_keymap('n', 'J', 'mzJ`z', {noremap = true, silent = true})
