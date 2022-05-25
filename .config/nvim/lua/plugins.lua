@@ -70,9 +70,6 @@ return require("packer").startup(
         use {'machakann/vim-highlightedyank'}
         -- let g:highlightedyank_highlight_duration = 100
 
-        -- Easy commenting for Vim
-        use {'preservim/nerdcommenter'}
-
         -- LSP / Language Server Protocol
         use {
             'neovim/nvim-lspconfig',
@@ -95,8 +92,12 @@ return require("packer").startup(
         use {'nvim-lua/lsp-status.nvim'}
 
         --use {'simrat39/symbols-outline.nvim'}
-        use {'marcuscaisey/symbols-outline.nvim', branch = 'relative-width'}
-
+        use {
+            'numToStr/Comment.nvim',
+            config = function()
+                require('Comment').setup()
+            end
+        }
         -- Telescope fuzzy find files/grep
         use {'nvim-lua/popup.nvim'}
         use {'nvim-lua/plenary.nvim'}

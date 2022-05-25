@@ -1,7 +1,14 @@
-elixir 1.6
+elixir 1.13.1
 kubectl 1.18.2
 helm 2.9.1
 eksctl 0.2.1
 terraform 0.14.6
 terragrunt 0.23.31
 kustomize 3.10.0
+golang 1.17.5
+saml2aws 2.27.1
+awscli 2.1.38
+kubectx 0.9.3
+argo 2.12.10
+erlang 24.2
+python 3.8.6

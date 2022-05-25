@@ -77,8 +77,6 @@ local function documentHighlight(client, bufnr)
     end
 end
 
-require'lspconfig'.elixirls.setup{}
-
 -- needed for the LSP to recognize elixir files (alternativly just use elixir-editors/vim-elixir)
 vim.cmd([[
   au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
@@ -118,43 +116,21 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+
+lspconfig['elixirls'].setup{
+    cmd = { "/Users/fbecker18/opt/elixir-ls/language_server.sh"},
+    on_attach = on_attach,
+    capabilities = capabilities,
+}
+
 -- Enable the following language servers
-local servers = { 'gopls', 'julials', 'rust_analyzer', 'pyright', 'elixirls' }
+local servers = { 'gopls', 'julials', 'rust_analyzer', 'pyright' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
     capabilities = capabilities,
   }
 end
-
---require("lspconfig").gopls.setup({
-	--cmd = { "gopls", "serve" },
-	--settings = {
-		--gopls = {
-			--analyses = {
-				--unusedparams = true,
-			--},
-			--staticcheck = true,
-		--},
-	--},
---})
-
---require'lspconfig'.julials.setup{}
-
---require'lspconfig'.pyright.setup{}
-
---require("lspconfig").rust_analyzer.setup({
-    ----cmd = { "rustup", "run", "nightly", "rust-analyzer"},
-    --[>
-    --settings = {
-            --rust = {
-            --unstable_features = true,
-            --build_on_save = false,
-            --all_features = true,
-        --},
-    --}
-    ----]]
---})
 
 require('rust-tools').setup({
     tools = {
@@ -164,14 +140,6 @@ require('rust-tools').setup({
         }
     }
 })
-
-vim.g.symbols_outline = {
-    auto_close = true,
-    highlight_hovered_item = true,
-    show_guides = true,
-    relative_width = true,
-    width = 25,
-}
 
 --vim.cmd([[
     --augroup

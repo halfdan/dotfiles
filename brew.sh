@@ -18,3 +18,6 @@ brew install fzf
 brew install direnv
 brew install jq
 brew install ctags
+
+# Post install 
+$(brew --prefix)/opt/fzf/install

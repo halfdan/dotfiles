@@ -11,6 +11,7 @@ alias vim="nvim"
 alias v="nvim"
 alias wget="wget -q -c -w 3 --show-progress"
 alias p="python"
+alias va=". .venv/bin/activate"
 
 ## Second Measure
 alias pa="aws-okta exec prod-admin -- "

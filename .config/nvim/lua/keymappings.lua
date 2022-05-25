@@ -55,11 +55,10 @@ vim.api.nvim_set_keymap('n', '<Leader>ff', ':lua require(\'telescope.builtin\').
 vim.api.nvim_set_keymap('n', '<leader>fw', ':lua require(\'telescope.builtin\').grep_string { search = vim.fn.expand("<cword>") }<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>fb', ':lua require(\'telescope.builtin\').buffers()<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<leader>vh', ':lua require(\'telescope.builtin\').help_tags()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>gw', ':lua require(\'telescope\').extensions.git_worktree.git_worktrees()<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>gm', ':lua require(\'telescope\').extensions.git_worktree.create_git_worktree()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gwl', ':lua require(\'telescope\').extensions.git_worktree.git_worktrees()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>gwc', ':lua require(\'telescope\').extensions.git_worktree.create_git_worktree()<CR>', {noremap = true})
 
 -- Tagbar
-vim.api.nvim_set_keymap('n', '<Leader>tt', ':SymbolsOutline<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', '<Leader>hl', ':nohl<CR>', {noremap = true})
 
 -- Vim Test
