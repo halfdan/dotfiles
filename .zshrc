@@ -31,15 +31,9 @@ SAVEHIST=10000
 #compinit
 #setopt COMPLETE_ALIASES
 
-# goodies
-eval "$(direnv hook zsh)"
-eval "$(starship init zsh)"
-
 . $HOME/.asdf/asdf.sh
 . $HOME/.asdf/completions/asdf.bash
 
-
-####  smctl@bootstrap.sm_shell_helpers-start
-. $HOME/.sm.zshrc
-####  smctl@bootstrap.sm_shell_helpers-end
-
+# goodies
+eval "$(direnv hook zsh)"
+eval "$(starship init zsh)"
