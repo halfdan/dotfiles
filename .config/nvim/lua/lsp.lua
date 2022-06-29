@@ -118,7 +118,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 
 lspconfig['elixirls'].setup{
-    cmd = { "/Users/fbecker18/opt/elixir-ls/language_server.sh"},
+    cmd = { "/home/halfdan/opt/elixir-ls/rel/language_server.sh"},
     on_attach = on_attach,
     capabilities = capabilities,
 }

@@ -33,3 +33,8 @@ vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shif
 vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = O.timeoutlen -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
+
+
+-- Enable telescope theme
+vim.g.gruvbox_baby_telescope_theme = 1
+vim.g.gruvbox_baby_background_color = "dark"
