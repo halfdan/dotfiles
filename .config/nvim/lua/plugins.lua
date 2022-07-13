@@ -86,7 +86,7 @@ return require("packer").startup(
         use {'L3MON4D3/LuaSnip'} 
         use {'saadparwaiz1/cmp_luasnip'}
         
-        use {'tami5/lspsaga.nvim'}
+        use {'glepnir/lspsaga.nvim'}
 
         -- Used to display LSP status in Lualine
         use {'nvim-lua/lsp-status.nvim'}

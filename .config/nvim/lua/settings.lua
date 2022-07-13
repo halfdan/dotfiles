@@ -33,7 +33,9 @@ vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shif
 vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = O.timeoutlen -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
-
+vim.o.laststatus = 3 -- Set global status bar
+vim.opt.showtabline = 0 -- Disable tabline
+-- vim.opt.winbar = "%=%m %f" -- Show winbar with modified flag and filename right adjusted
 
 -- Enable telescope theme
 vim.g.gruvbox_baby_telescope_theme = 1

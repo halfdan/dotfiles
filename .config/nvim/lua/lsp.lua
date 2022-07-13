@@ -29,6 +29,15 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
+local saga = require 'lspsaga'
+saga.init_lsp_saga({
+  -- symbols in winbar
+  symbol_in_winbar = true,
+  winbar_file_format = function() 
+      return vim.fn.expand("%=%m %f")
+  end,
+})
+
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
     "   (Text) ",
@@ -118,7 +127,7 @@ capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 
 lspconfig['elixirls'].setup{
-    cmd = { "/home/halfdan/opt/elixir-ls/rel/language_server.sh"},
+    cmd = { "/Users/fbecker18/opt/elixir-ls/language_server.sh"},
     on_attach = on_attach,
     capabilities = capabilities,
 }
