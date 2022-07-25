@@ -35,6 +35,7 @@ return require("packer").startup(
         -- Packer can manage itself as an optional plugin
         use "wbthomason/packer.nvim"
 
+        use {'TimUntersberger/neogit' }
         use {'airblade/vim-gitgutter'}
         -- use {'andymass/vim-matchup'}
 
@@ -107,9 +108,12 @@ return require("packer").startup(
 
         use {'theprimeagen/git-worktree.nvim'}
 
-        -- => Language Support
-        use {'neoclide/jsonc.vim'}
+        -- Debugging
+        use("mfussenegger/nvim-dap")
+        use("rcarriga/nvim-dap-ui")
+        use("theHamsta/nvim-dap-virtual-text")
 
+        -- => Language Support
         use {'rust-lang/rust.vim'}
         use {'simrat39/rust-tools.nvim'}
 
@@ -119,16 +123,12 @@ return require("packer").startup(
         use {'JuliaEditorSupport/julia-vim', opt=true}
         vim.g.latex_to_unicode_auto = 1
 
-        -- Formatting Julia Files
-        use {'kdheepak/JuliaFormatter.vim'}
 
         -- themes & colorschemes
         use {'arcticicestudio/nord-vim'}
         use {'joshdick/onedark.vim'}
         use {'gruvbox-community/gruvbox'}
         use {'luisiacc/gruvbox-baby'}
-
-        require_plugin('julia-vim')
     end
 )
 
