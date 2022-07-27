@@ -1,0 +1,5 @@
+# Devices
+set $display_tv 'Technical Concepts Ltd TCL SMART TV 0x00001111'
+
+# Resolution
+output $display_tv mode 1920x1080@30Hz
