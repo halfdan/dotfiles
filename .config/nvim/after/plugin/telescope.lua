@@ -1,24 +1,25 @@
 local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
+local builtin = require("telescope.builtin")
 
 nnoremap("<leader>ps", function()
-    require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})
+    builtin.grep_string({ search = vim.fn.input("Grep For > ")})
 end)
 nnoremap("<C-p>", function()
-    require('telescope.builtin').git_files()
+    builtin.git_files()
 end)
 nnoremap("<Leader>pf", function()
-    require('telescope.builtin').find_files()
+    builtin.find_files()
 end)
 
 nnoremap("<leader>pw", function()
-    require('telescope.builtin').grep_string { search = vim.fn.expand("<cword>") }
+    builtin.grep_string { search = vim.fn.expand("<cword>") }
 end)
 nnoremap("<leader>pb", function()
-    require('telescope.builtin').buffers()
+    builtin.buffers()
 end)
 nnoremap("<leader>vh", function()
-    require('telescope.builtin').help_tags()
+    builtin.help_tags()
 end)
 
 -- Telescope

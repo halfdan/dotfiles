@@ -25,7 +25,7 @@ vim.bo.smartindent = true -- Makes indenting smart
 vim.wo.number = true -- set numbered lines
 vim.wo.relativenumber = true -- set relative number
 vim.wo.cursorline = true -- Enable highlighting of the current line
-vim.o.showtabline = 2 -- Always show tabs
+vim.o.showtabline = 1 -- Always show tabs
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore
 vim.o.backup = false -- This is recommended by coc
 vim.o.writebackup = false -- This is recommended by coc
@@ -34,11 +34,10 @@ vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.laststatus = 3 -- Set global status bar
-vim.opt.showtabline = 0 -- Disable tabline
--- vim.opt.winbar = "%=%m %f" -- Show winbar with modified flag and filename right adjusted
+vim.opt.winbar = "%=%m %f" -- Show winbar with modified flag and filename right adjusted
 
 -- Enable telescope theme
 vim.g.gruvbox_baby_telescope_theme = 1
-vim.g.gruvbox_baby_background_color = "dark"
+vim.g.gruvbox_baby_background_color = "light"
 
 vim.g.mapleader = ' '

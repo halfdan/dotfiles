@@ -33,15 +33,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-local saga = require 'lspsaga'
-saga.init_lsp_saga({
-  -- symbols in winbar
-  symbol_in_winbar = true,
-  winbar_file_format = function() 
-      return vim.fn.expand("%=%m %f")
-  end,
-})
-
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
     "   (Text) ",

@@ -117,12 +117,8 @@ return require("packer").startup(
         use {'rust-lang/rust.vim'}
         use {'simrat39/rust-tools.nvim'}
 
-        -- Debugger support via dap
-        use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-
-        use {'JuliaEditorSupport/julia-vim', opt=true}
-        vim.g.latex_to_unicode_auto = 1
-
+        -- use {'JuliaEditorSupport/julia-vim', opt=true}
+        -- vim.g.latex_to_unicode_auto = 1
 
         -- themes & colorschemes
         use {'arcticicestudio/nord-vim'}
