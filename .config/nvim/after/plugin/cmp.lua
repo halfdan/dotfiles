@@ -9,7 +9,6 @@ local source_mapping = {
 	cmp_tabnine = "[TN]",
 	path = "[Path]",
 }
-
 cmp.setup({
     -- snippet = {
     --     -- REQUIRED - you must specify a snippet engine
@@ -32,8 +31,8 @@ cmp.setup({
         end,
     },
     mapping = {
-        ['<C-p>'] = cmp.mapping.select_prev_item(),
-        ['<C-n>'] = cmp.mapping.select_next_item(),
+        ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+        ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
         ['<C-d>'] = cmp.mapping.scroll_docs(-4),
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -76,7 +75,8 @@ cmp.setup.cmdline(':', {
         { name = 'path' }
     }, {
         { name = 'cmdline' }
-    })
+    }),
+    mappings = cmp.mapping.preset.cmdline(),
 })
 
 -- Setup tabnine 

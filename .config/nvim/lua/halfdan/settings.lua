@@ -38,6 +38,6 @@ vim.opt.winbar = "%=%m %f" -- Show winbar with modified flag and filename right 
 
 -- Enable telescope theme
 vim.g.gruvbox_baby_telescope_theme = 1
-vim.g.gruvbox_baby_background_color = "light"
+vim.g.gruvbox_baby_background_color = "dark"
 
 vim.g.mapleader = ' '
