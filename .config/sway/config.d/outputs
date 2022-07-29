@@ -1,5 +1,7 @@
 # Devices
 set $display_tv 'Technical Concepts Ltd TCL SMART TV 0x00001111'
+set $curved_small 'Goldstar Company Ltd LG HDR WQHD 0x0000655D'
 
 # Resolution
 output $display_tv mode 1920x1080@30Hz
+output $curved_small mode 3440x1440@60Hz
