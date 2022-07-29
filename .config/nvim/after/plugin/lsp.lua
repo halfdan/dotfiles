@@ -125,9 +125,9 @@ local function config(_config)
 	}, _config or {})
 end
 
-lspconfig['elixirls'].setup{config({
-  cmd = { "/Users/fbecker18/opt/elixir-ls/language_server.sh"}
-})}
+lspconfig['elixirls'].setup(config({
+  cmd = {"/Users/fbecker18/opt/elixir-ls/language_server.sh"}
+}))
 
 -- Enable the following language servers
 local servers = { 'gopls', 'julials', 'rust_analyzer', 'pyright' }

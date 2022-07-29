@@ -6,6 +6,7 @@ require('halfdan.globals')
 require('halfdan.keymap')
 
 require('halfdan.colorscheme')
+require('halfdan.treesitter')
 
 require('halfdan.themes.nord')
 
