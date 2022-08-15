@@ -99,34 +99,42 @@ local lspconfig = require 'lspconfig'
 local function config(_config)
 	return vim.tbl_deep_extend("force", {
 		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-		on_attach = function()
-      -- local opts = { noremap = true, silent = true }
-      nnoremap("gd", function() vim.lsp.buf.definition() end)
-      nnoremap("gD", function() vim.lsp.buf.declaration() end)
-      nnoremap("K", function() vim.lsp.buf.hover() end)
-      nnoremap("<leader>vws", function() vim.lsp.buf.workspace_symbol() end)
-      nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
-      nnoremap("[d", function() vim.diagnostic.goto_next() end)
-      nnoremap("]d", function() vim.diagnostic.goto_prev() end)
-      nnoremap("<leader>vca", function() vim.lsp.buf.code_action() end)
-      nnoremap("<leader>vrr", function() vim.lsp.buf.references() end)
-      nnoremap("<leader>vrn", function() vim.lsp.buf.rename() end)
-      inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
-      --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-      -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-      -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-		end,
+        on_attach = function()
+            -- local opts = { noremap = true, silent = true }
+            nnoremap("gd", function() vim.lsp.buf.definition() end)
+            nnoremap("gD", function() vim.lsp.buf.declaration() end)
+            nnoremap("K", function() vim.lsp.buf.hover() end)
+            nnoremap("gW", function() vim.lsp.buf.workspace_symbol() end)
+            nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
+            nnoremap("[d", function() vim.diagnostic.goto_next() end)
+            nnoremap("]d", function() vim.diagnostic.goto_prev() end)
+            nnoremap("<leader>ca", function() vim.lsp.buf.code_action() end)
+            nnoremap("<leader>rr", function() vim.lsp.buf.references() end)
+            nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
+            nnoremap("<leader>cl", function() vim.lsp.codelens.run() end)
+            inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
+            --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+            -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+            end,
 	}, _config or {})
 end
 
-lspconfig['elixirls'].setup(config({
-  cmd = {"/Users/fbecker18/opt/elixir-ls/language_server.sh"}
+local elixir = require('elixir')
+elixir.setup(config({
+  cmd = {"/home/halfdan/opt/elixir-ls/bin/language_server.sh"},
+  settings = elixir.settings({
+    dialyzerEnabled = true,
+    fetchDeps = false,
+    enableTestLenses = true,
+    suggestSpecs = false,
+  }),
 }))
 
 -- Enable the following language servers

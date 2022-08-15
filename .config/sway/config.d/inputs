@@ -1,3 +1,9 @@
 input 1452:591:Keychron_Keychron_K2 {
-    xkb_layout us
+    xkb_layout real-prog-dvorak
+    xkb_options caps:escape
+}
+
+input 10730:258:Kinesis_Advantage2_Keyboard {
+    xkb_layout real-prog-dvorak
+    xkb_options caps:escape
 }

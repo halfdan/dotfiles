@@ -55,6 +55,7 @@ return require("packer").startup(
 
         -- Treesitter
         use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
+        use {"nvim-treesitter/nvim-treesitter-textobjects"}
 
         use {'preservim/tagbar'}
         vim.g.tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -116,7 +117,7 @@ return require("packer").startup(
         -- => Language Support
         use {'rust-lang/rust.vim'}
         use {'simrat39/rust-tools.nvim'}
-
+        use({ "mhanberg/elixir.nvim", requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" }})
         -- use {'JuliaEditorSupport/julia-vim', opt=true}
         -- vim.g.latex_to_unicode_auto = 1
 
