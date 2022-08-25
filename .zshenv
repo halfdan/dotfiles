@@ -13,17 +13,8 @@ alias wget="wget -q -c -w 3 --show-progress"
 alias p="python"
 alias va=". .venv/bin/activate"
 
-## Second Measure
-alias pa="aws-okta exec prod-admin -- "
-alias pe="aws-okta exec prod-eng -- "
-alias da="aws-okta exec dev-admin -- "
-alias de="aws-okta exec dev-eng -- "
-alias s3="aws s3"
-alias kg="kubectl get "
-alias kd="kubectl describe "
-alias ke="kubectl edit "
-alias ctx="kubectx"
-alias ctl="kubectl"
+alias aoeu="asdf" 
+alias update-nvim-nightly='asdf uninstall neovim nightly && asdf install neovim nightly'
 
 # zsh-autosuggest
 bindkey '^ ' autosuggest-accept
