@@ -6,10 +6,12 @@ nnoremap("<leader>ps", function()
     builtin.grep_string({ search = vim.fn.input("Grep For > ")})
 end)
 nnoremap("<C-p>", function()
-    builtin.git_files()
+  if not pcall(builtin.git_files) then
+    builtin.find_files()
+  end
 end)
 nnoremap("<Leader>pf", function()
-    builtin.find_files()
+  builtin.find_files()
 end)
 
 nnoremap("<leader>pw", function()

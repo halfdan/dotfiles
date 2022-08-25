@@ -30,7 +30,7 @@ end
 
 vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
-return require("packer").startup(
+return require("packer").startup({
   function(use)
     -- Packer can manage itself as an optional plugin
     use "wbthomason/packer.nvim"
@@ -125,6 +125,13 @@ return require("packer").startup(
     use {'joshdick/onedark.vim'}
     use {'gruvbox-community/gruvbox'}
     use {'luisiacc/gruvbox-baby'}
-  end
-)
+  end,
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float({ border = 'single' })
+      end
+    }
+  }
+})
 

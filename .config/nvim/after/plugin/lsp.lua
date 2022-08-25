@@ -112,6 +112,7 @@ local function config(_config)
             nnoremap("<leader>rr", function() vim.lsp.buf.references() end)
             nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
             nnoremap("<leader>cl", function() vim.lsp.codelens.run() end)
+            nnoremap("<leader>ff", function() vim.lsp.buf.format{async = true} end)
             inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
             --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
             -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
@@ -128,7 +129,7 @@ end
 
 local elixir = require('elixir')
 elixir.setup(config({
-  cmd = {"/home/halfdan/opt/elixir-ls/bin/language_server.sh"},
+  cmd = {"/Users/fbecker18/opt/elixir-ls/bin/language_server.sh"},
   settings = elixir.settings({
     dialyzerEnabled = true,
     fetchDeps = false,
@@ -152,12 +153,12 @@ require('rust-tools').setup({
     }
 })
 
---vim.cmd([[
-    --augroup
-        --autocmd!
-        --autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 100)
-        --autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
-        --autocmd BufWritePre *.ex,*.exs lua vim.lsp.buf.formatting_sync(nil, 100)
-        --autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
-    --augroup END
---]])
+-- vim.cmd([[
+--     augroup
+--         autocmd!
+--         autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 100)
+--         autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
+--         autocmd BufWritePre *.ex,*.exs lua vim.lsp.buf.formatting_sync(nil, 100)
+--         autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
+--     augroup END
+-- ]])
