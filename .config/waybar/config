@@ -30,6 +30,7 @@
 		//"custom/arrow1",
 		//"custom/alsa",
 		"pulseaudio",
+		"bluetooth",
 		//"sndio",
 		//"custom/arrow2",
 		"network",

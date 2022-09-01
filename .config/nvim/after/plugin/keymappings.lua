@@ -57,11 +57,14 @@ nnoremap('Q', '<Nop>')
 nnoremap('<Leader>hl', ':nohl<CR>')
 
 -- Vim Test
-nnoremap('<leader>t', ':TestNearest<CR>')
-nnoremap('<leader>T', ':TestFile<CR>')
-nnoremap('<leader>a', ':TestSuite<CR>')
-nnoremap('<leader>l', ':TestLast<CR>')
-nnoremap('<leader>g', ':TestVisit<CR>')
+nnoremap('<leader>tt', ':TestNearest<CR>')
+nnoremap('<leader>tT', ':TestFile<CR>')
+nnoremap('<leader>ta', ':TestSuite<CR>')
+nnoremap('<leader>tl', ':TestLast<CR>')
+nnoremap('<leader>tg', ':TestVisit<CR>')
+
+-- Reload init.lua
+nnoremap('<leader>sv', ':source $MYVIMRC<CR>')
 
 vim.cmd("nnoremap <silent> <C-p> :Lspsaga diagnostic_jump_prev<CR>")
 vim.cmd("nnoremap <silent> <C-n> :Lspsaga diagnostic_jump_next<CR>")
