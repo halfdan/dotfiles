@@ -47,10 +47,21 @@ return require("packer").startup({
     -- Goodies
     use {'tpope/vim-fugitive'}
     use {'tpope/vim-surround'} -- ✅
-    use {'tpope/vim-dispatch'} 
+    use {'tpope/vim-dispatch'}
 
     -- Testing
     use {'vim-test/vim-test'}
+    use {
+      "nvim-neotest/neotest",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-treesitter/nvim-treesitter",
+        "antoinemadec/FixCursorHold.nvim",
+
+        "jfpedroza/neotest-elixir"
+      }
+    }
+    use {"nvim-neotest/neotest-vim-test" }
 
     -- Treesitter
     use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
@@ -65,6 +76,9 @@ return require("packer").startup({
       requires = {'kyazdani42/nvim-web-devicons'}
     }
 
+    use {'rcarriga/nvim-notify'}
+
+    use {'nvim-orgmode/orgmode'}
 
     use {'justinmk/vim-sneak'}
 
@@ -84,7 +98,10 @@ return require("packer").startup({
     use {'hrsh7th/nvim-cmp'}
     use {'tzachar/cmp-tabnine', run = './install.sh'}
     use {'onsails/lspkind-nvim'} -- Display symbol with cmp suggestions
-    use {'L3MON4D3/LuaSnip'} 
+    use {
+      'L3MON4D3/LuaSnip',
+      requires = {"rafamadriz/friendly-snippets"},
+    } 
     use {'saadparwaiz1/cmp_luasnip'}
 
     use {'glepnir/lspsaga.nvim'}

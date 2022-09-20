@@ -2,36 +2,51 @@ local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local inoremap = Remap.inoremap
 
--- TODO figure out why this don't work
-vim.fn.sign_define(
-    "LspDiagnosticsSignError",
-    {texthl = "LspDiagnosticsSignError", text = "", numhl = "LspDiagnosticsSignError"}
-)
-vim.fn.sign_define(
-    "LspDiagnosticsSignWarning",
-    {texthl = "LspDiagnosticsSignWarning", text = "", numhl = "LspDiagnosticsSignWarning"}
-)
-vim.fn.sign_define(
-    "LspDiagnosticsSignHint",
-    {texthl = "LspDiagnosticsSignHint", text = "", numhl = "LspDiagnosticsSignHint"}
-)
-vim.fn.sign_define(
-    "LspDiagnosticsSignInformation",
-    {texthl = "LspDiagnosticsSignInformation", text = "", numhl = "LspDiagnosticsSignInformation"}
-)
+vim.fn.sign_define("DiagnosticSignError",  {text = "", texthl = "DiagnosticSignError"})
+vim.fn.sign_define("DiagnosticSignWarn",   {text = "", texthl = "DiagnosticSignWarn"})
+vim.fn.sign_define("DiagnosticSignInfo",   {text = "", texthl = "DiagnosticSignInfo"})
+vim.fn.sign_define("DiagnosticSignHint",   {text = "", texthl = "DiagnosticSignHint"})
 
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = {
-      prefix = "",
-      spacing = 1,
-    },
+    -- virtual_text = {
+    --   prefix = "",
+    --   spacing = 1,
+    -- },
     signs = true,
     underline = true,
   }
 )
+
+-- Setup for nvim-notify
+vim.lsp.set_log_level(1 )
+
+local convert_lsp_log_level_to_neovim_log_level = function(lsp_log_level)
+  if lsp_log_level == 1 then
+    return 4
+  elseif lsp_log_level == 2 then
+    return 3
+  elseif lsp_log_level == 3 then
+    return 2
+  elseif lsp_log_level == 4 then
+    return 1
+  end
+end
+
+local levels = {
+  "ERROR",
+  "WARN",
+  "INFO",
+  "DEBUG",
+  [0] = "TRACE",
+}
+vim.lsp.handlers["window/showMessage"] = function(_, result, ...)
+  if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
+    vim.notify(result.message, levels[result.type])
+  end
+end
 
 -- symbols for autocomplete
 vim.lsp.protocol.CompletionItemKind = {
@@ -81,12 +96,12 @@ local function documentHighlight(client, bufnr)
     end
 end
 
--- needed for the LSP to recognize elixir files (alternativly just use elixir-editors/vim-elixir)
-vim.cmd([[
-  au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
-  au BufRead,BufNewFile *.eex,*.leex,*.sface set filetype=eelixir
-  au BufRead,BufNewFile mix.lock set filetype=elixir
-]])
+-- -- needed for the LSP to recognize elixir files (alternativly just use elixir-editors/vim-elixir)
+-- vim.cmd([[
+--   au BufRead,BufNewFile *.ex,*.exs set filetype=elixir
+--   au BufRead,BufNewFile *.eex,*.leex,*.sface set filetype=eelixir
+--   au BufRead,BufNewFile mix.lock set filetype=elixir
+-- ]])
 
 
 
@@ -95,47 +110,64 @@ vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<
 vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
 
 -- LSP settings
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
 local lspconfig = require 'lspconfig'
+
+local on_attach = function(client, bufnr)
+  nnoremap("gd", function() vim.lsp.buf.definition() end)
+  nnoremap("gD", function() vim.lsp.buf.declaration() end)
+  nnoremap("K", function() vim.lsp.buf.hover() end)
+  nnoremap("gW", function() vim.lsp.buf.workspace_symbol() end)
+  nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
+  nnoremap("[d", function() vim.diagnostic.goto_next() end)
+  nnoremap("]d", function() vim.diagnostic.goto_prev() end)
+  nnoremap("<leader>ca", function() vim.lsp.buf.code_action() end)
+  nnoremap("gr", function() vim.lsp.buf.references() end)
+  nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
+  nnoremap("<leader>cl", function() vim.lsp.codelens.run() end)
+  nnoremap("<leader>ff", function() vim.lsp.buf.format{async = true} end)
+  inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
+
+  lsp_status.on_attach(client, bufnr)
+end
+
 local function config(_config)
-	return vim.tbl_deep_extend("force", {
-		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
-        on_attach = function()
-            -- local opts = { noremap = true, silent = true }
-            nnoremap("gd", function() vim.lsp.buf.definition() end)
-            nnoremap("gD", function() vim.lsp.buf.declaration() end)
-            nnoremap("K", function() vim.lsp.buf.hover() end)
-            nnoremap("gW", function() vim.lsp.buf.workspace_symbol() end)
-            nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
-            nnoremap("[d", function() vim.diagnostic.goto_next() end)
-            nnoremap("]d", function() vim.diagnostic.goto_prev() end)
-            nnoremap("<leader>ca", function() vim.lsp.buf.code_action() end)
-            nnoremap("<leader>rr", function() vim.lsp.buf.references() end)
-            nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
-            nnoremap("<leader>cl", function() vim.lsp.codelens.run() end)
-            nnoremap("<leader>ff", function() vim.lsp.buf.format{async = true} end)
-            inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
-            --vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-            -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-            -- vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
-            end,
-	}, _config or {})
+  _config = vim.tbl_deep_extend("force", {
+    log_level = vim.lsp.protocol.MessageType.Log,
+    message_level = vim.lsp.protocol.MessageType.Log,
+    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    on_attach = on_attach,
+  }, _config or {})
+
+  -- Set default client capabilities plus window/workDoneProgress
+  _config.capabilities = vim.tbl_extend('keep', _config.capabilities or {}, lsp_status.capabilities)
+
+  return _config
 end
 
 local elixir = require('elixir')
 elixir.setup(config({
-  cmd = {"/Users/fbecker18/opt/elixir-ls/bin/language_server.sh"},
+  -- repo = "mhanberg/elixir-ls", -- defaults to elixir-lsp/elixir-ls
+  -- branch = "mh/all-workspace-symbols", -- defaults to nil, just checkouts out the default branch, mutually exclusive with the `tag` option
   settings = elixir.settings({
     dialyzerEnabled = true,
     fetchDeps = false,
     enableTestLenses = true,
     suggestSpecs = false,
   }),
+  on_attach = function(client, bufnr)
+    on_attach(client, bufnr)
+
+    local map_opts = { buffer = true, noremap = true}
+
+    -- remove the pipe operator
+    vim.keymap.set("n", "<leader>fp", ":ElixirFromPipe<cr>", map_opts)
+    -- add the pipe operator
+    vim.keymap.set("n", "<leader>tp", ":ElixirToPipe<cr>", map_opts)
+    vim.keymap.set("v", "<leader>em", ":ElixirExpandMacro<cr>", map_opts)
+  end
 }))
 
 -- Enable the following language servers
@@ -143,6 +175,16 @@ local servers = { 'gopls', 'julials', 'rust_analyzer', 'pyright' }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup(config())
 end
+
+lspconfig.sumneko_lua.setup(config({
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { 'vim' }
+      }
+    }
+  }
+}))
 
 require('rust-tools').setup({
     tools = {

@@ -2,8 +2,8 @@ local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local builtin = require("telescope.builtin")
 
-nnoremap("<leader>ps", function()
-    builtin.grep_string({ search = vim.fn.input("Grep For > ")})
+nnoremap("<leader>pg", function()
+  builtin.grep_string({ search = vim.fn.input("Grep For > ")})
 end)
 nnoremap("<C-p>", function()
   if not pcall(builtin.git_files) then
@@ -14,22 +14,22 @@ nnoremap("<Leader>pf", function()
   builtin.find_files()
 end)
 
+nnoremap("<Leader>ps", function()
+  builtin.lsp_workspace_symbols()
+end)
 nnoremap("<leader>pw", function()
-    builtin.grep_string { search = vim.fn.expand("<cword>") }
+  builtin.grep_string { search = vim.fn.expand("<cword>") }
 end)
 nnoremap("<leader>pb", function()
-    builtin.buffers()
+  builtin.buffers()
 end)
 nnoremap("<leader>vh", function()
-    builtin.help_tags()
+  builtin.help_tags()
+end)
+nnoremap("<leader>gw", function()
+  require('telescope').extensions.git_worktree.git_worktrees()
+end)
+nnoremap("<leader>gc", function()
+  builtin.git_branches()
 end)
 
--- Telescope
--- nnoremap('<leader>fs', ':lua require(\'telescope.builtin\').grep_string({ search = vim.fn.input("Grep For > ")})<CR>')
--- nnoremap('<Leader>ff', ':lua require(\'telescope.builtin\').find_files()<CR>')
-
--- nnoremap('<leader>fw', ':lua require(\'telescope.builtin\').grep_string { search = vim.fn.expand("<cword>") }<CR>')
--- nnoremap('<leader>fb', ':lua require(\'telescope.builtin\').buffers()<CR>')
--- nnoremap('<leader>vh', ':lua require(\'telescope.builtin\').help_tags()<CR>')
--- nnoremap('<leader>gwl', ':lua require(\'telescope\').extensions.git_worktree.git_worktrees()<CR>')
--- nnoremap('<leader>gwc', ':lua require(\'telescope\').extensions.git_worktree.create_git_worktree()<CR>')

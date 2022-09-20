@@ -1,3 +1,5 @@
+vim.notify = require("notify")
+
 vim.cmd('set iskeyword+=-') -- treat dash separated words as a word text object"
 vim.cmd('set shortmess+=c') -- Don't pass messages to |ins-completion-menu|.
 vim.cmd('set inccommand=split') -- Make substitution work in realtime
@@ -17,7 +19,8 @@ vim.o.mouse = "a" -- Enable your mouse
 vim.o.splitbelow = true -- Horizontal splits will automatically be below
 vim.o.termguicolors = true -- set term gui colors most terminals support this
 vim.o.splitright = true -- Vertical splits will automatically be to the right
-vim.o.conceallevel = 0 -- So that I can see `` in markdown files
+vim.opt.conceallevel = 2
+vim.opt.concealcursor = 'nc'
 vim.cmd('set ts=2') -- Insert 4 spaces for a tab
 vim.cmd('set sw=2') -- Change the number of space characters inserted for indentation
 vim.cmd('set expandtab') -- Converts tabs to spaces
@@ -34,10 +37,10 @@ vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.laststatus = 3 -- Set global status bar
-vim.opt.winbar = "%=%m %f" -- Show winbar with modified flag and filename right adjusted
 
 -- Enable telescope theme
-vim.g.gruvbox_baby_telescope_theme = 1
-vim.g.gruvbox_baby_background_color = "dark"
+-- vim.g.gruvbox_baby_telescope_theme = 1
+-- vim.g.gruvbox_baby_background_color = "dark"
 
+vim.g.colorscheme = "gruvbox-baby" -- Set colorscheme
 vim.g.mapleader = ' '

@@ -1,10 +1,12 @@
 local actions = require('telescope.actions')
+
+require("telescope").load_extension("git_worktree")
+
 -- Global remapping
-------------------------------
--- '--color=never',
 require('telescope').setup {
     defaults = {
         find_command = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
+        file_ignore_patterns = {"_build", "node_modules", "deps" },
         prompt_position = "bottom",
          --prompt_prefix = " ",
         prompt_prefix = "  ",
@@ -16,7 +18,6 @@ require('telescope').setup {
         layout_strategy = "horizontal",
         layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
         file_sorter = require'telescope.sorters'.get_fuzzy_file,
-        file_ignore_patterns = {"_build", "node_modules", "deps" },
         generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
         shorten_path = true,
         winblend = 0,
@@ -32,7 +33,6 @@ require('telescope').setup {
         file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
         grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
         qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
-        layout_strategy = "horizontal",
         -- Developer configurations: Not meant for general override
         buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
         mappings = {
@@ -43,7 +43,6 @@ require('telescope').setup {
                 -- To disable a keymap, put [map] = false
                 -- So, to not map "<C-n>", just put
                 -- ["<c-x>"] = false,
-                
 
                 -- Otherwise, just set the mapping to the function that you want it to be.
                 -- ["<C-i>"] = actions.select_horizontal,

@@ -47,6 +47,10 @@ vnoremap('>', '>gv')
 nnoremap('<TAB>', ':bnext<CR>')
 nnoremap('<S-TAB>', ':bprevious<CR>')
 
+-- Quickfix list
+nnoremap('[q', ':cprev<CR>')
+nnoremap(']q', ':cnext<CR>')
+
 -- Move selected line / block of text in visual mode
 xnoremap('J', ':move \'>+1<CR>gv-gv')
 xnoremap('K', ':move \'<-2<CR>gv-gv')

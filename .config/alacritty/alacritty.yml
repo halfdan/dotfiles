@@ -16,7 +16,8 @@ font:
     family: Hack Nerd Font
     style: Bold Italic
 
-  size: 11
+  size: 15
+  ligatures: true
 
 # Gruvbox
 colors:
@@ -47,5 +48,11 @@ colors:
     white: '#ebdbb2'
 
 window:
-  opacity: 0.75
+  opacity: 0.95
+  decorations: none
+  
+key_bindings:
+  - { key: Right, mods: Alt, chars: "\x1BF" }
+  - { key: Left,  mods: Alt, chars: "\x1BB" }
 
+alt_send_esc: true

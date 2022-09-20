@@ -1,12 +1,12 @@
 local saga = require 'lspsaga'
 saga.init_lsp_saga({
   -- symbols in winbar
-  symbol_in_winbar = {
-    enable = true,
-    click_support = true,
-    show_file = true,
-    in_custom = true,
-  },
+  -- symbol_in_winbar = {
+  --   enable = true,
+  --   click_support = true,
+  --   show_file = true,
+  --   in_custom = true,
+  -- },
 })
 
 local function get_file_name(include_path)
