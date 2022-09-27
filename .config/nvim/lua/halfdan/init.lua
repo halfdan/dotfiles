@@ -1,5 +1,8 @@
 require("halfdan.settings")
 require("halfdan.packer")
+
+require("impatient")
+
 require("halfdan.neogit")
 
 require('halfdan.globals')

@@ -35,6 +35,8 @@ return require("packer").startup({
     -- Packer can manage itself as an optional plugin
     use "wbthomason/packer.nvim"
 
+    use 'lewis6991/impatient.nvim'
+
     use {'TimUntersberger/neogit' }
     use {'airblade/vim-gitgutter'}
     -- use {'andymass/vim-matchup'}
@@ -48,6 +50,15 @@ return require("packer").startup({
     use {'tpope/vim-fugitive'}
     use {'tpope/vim-surround'} -- ✅
     use {'tpope/vim-dispatch'}
+
+    -- Treesitter
+    
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+    }
+    use { 'nvim-treesitter/playground', after = 'nvim-treesitter' }
+    use { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
 
     -- Testing
     use {'vim-test/vim-test'}
@@ -63,9 +74,6 @@ return require("packer").startup({
     }
     use {"nvim-neotest/neotest-vim-test" }
 
-    -- Treesitter
-    use {"nvim-treesitter/nvim-treesitter", run = ":TSUpdate"}
-    use {"nvim-treesitter/nvim-treesitter-textobjects"}
 
     use {'preservim/tagbar'}
     vim.g.tagbar_ctags_bin = '/usr/local/bin/ctags'
@@ -78,7 +86,15 @@ return require("packer").startup({
 
     use {'rcarriga/nvim-notify'}
 
-    use {'nvim-orgmode/orgmode'}
+    use {
+      "nvim-neorg/neorg",
+      event = "BufEnter",
+      after = "nvim-treesitter",
+      config = function()
+        require 'halfdan.neorg'
+      end
+    }
+    use {'nvim-neorg/neorg-telescope', after = "neorg"}
 
     use {'justinmk/vim-sneak'}
 
@@ -91,18 +107,33 @@ return require("packer").startup({
       'williamboman/nvim-lsp-installer',
     }
 
-    use {'hrsh7th/cmp-nvim-lsp'}
-    use {'hrsh7th/cmp-buffer'}
-    use {'hrsh7th/cmp-path'}
-    use {'hrsh7th/cmp-cmdline'}
-    use {'hrsh7th/nvim-cmp'}
-    use {'tzachar/cmp-tabnine', run = './install.sh'}
-    use {'onsails/lspkind-nvim'} -- Display symbol with cmp suggestions
     use {
-      'L3MON4D3/LuaSnip',
-      requires = {"rafamadriz/friendly-snippets"},
-    } 
-    use {'saadparwaiz1/cmp_luasnip'}
+        'L3MON4D3/LuaSnip',
+        event = "InsertEnter",
+        config = function()
+          require 'halfdan.luasnip'
+        end,
+    }
+    use {"rafamadriz/friendly-snippets", after="LuaSnip"}
+
+    use {
+      'hrsh7th/nvim-cmp',
+      requires = {
+        { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+        'hrsh7th/cmp-nvim-lsp',
+        'onsails/lspkind.nvim',
+        { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+        { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', event = 'CmdlineEnter' },
+        {'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' }
+      },
+      config = function()
+        require 'halfdan.cmp'
+      end,
+      event = 'InsertEnter',
+      after = 'LuaSnip',
+    }
 
     use {'glepnir/lspsaga.nvim'}
 
@@ -119,9 +150,9 @@ return require("packer").startup({
     -- Telescope fuzzy find files/grep
     use {'nvim-lua/popup.nvim'}
     use {'nvim-lua/plenary.nvim'}
+    
     use {'nvim-telescope/telescope.nvim'}
-    use {'nvim-telescope/telescope-project.nvim'}
-    use {'nvim-telescope/telescope-fzy-native.nvim'}
+    
 
     use {'theprimeagen/git-worktree.nvim'}
 
@@ -134,6 +165,7 @@ return require("packer").startup({
     use {'rust-lang/rust.vim'}
     use {'simrat39/rust-tools.nvim'}
     use({ "mhanberg/elixir.nvim", requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" }})
+    use {'tpope/vim-projectionist'}
     -- use {'JuliaEditorSupport/julia-vim', opt=true}
     -- vim.g.latex_to_unicode_auto = 1
 

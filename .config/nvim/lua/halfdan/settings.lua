@@ -37,10 +37,9 @@ vim.o.updatetime = 300 -- Faster completion
 vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.laststatus = 3 -- Set global status bar
-
+vim.b.did_ftplugin = 1
 -- Enable telescope theme
--- vim.g.gruvbox_baby_telescope_theme = 1
--- vim.g.gruvbox_baby_background_color = "dark"
+vim.g.gruvbox_baby_telescope_theme = 1
+vim.g.gruvbox_baby_background_color = "dark"
 
-vim.g.colorscheme = "gruvbox-baby" -- Set colorscheme
 vim.g.mapleader = ' '

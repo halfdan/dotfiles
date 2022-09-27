@@ -3,7 +3,7 @@ local nnoremap = Remap.nnoremap
 local builtin = require("telescope.builtin")
 
 nnoremap("<leader>pg", function()
-  builtin.grep_string({ search = vim.fn.input("Grep For > ")})
+  builtin.live_grep()
 end)
 nnoremap("<C-p>", function()
   if not pcall(builtin.git_files) then
@@ -26,10 +26,13 @@ end)
 nnoremap("<leader>vh", function()
   builtin.help_tags()
 end)
-nnoremap("<leader>gw", function()
+
+nnoremap("<leader>wc", function()
+  require('telescope').extensions.git_worktree.create_git_worktree()
+end)
+nnoremap("<leader>ws", function()
   require('telescope').extensions.git_worktree.git_worktrees()
 end)
 nnoremap("<leader>gc", function()
   builtin.git_branches()
 end)
-

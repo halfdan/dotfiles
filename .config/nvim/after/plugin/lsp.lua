@@ -195,12 +195,3 @@ require('rust-tools').setup({
     }
 })
 
--- vim.cmd([[
---     augroup
---         autocmd!
---         autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 100)
---         autocmd BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 100)
---         autocmd BufWritePre *.ex,*.exs lua vim.lsp.buf.formatting_sync(nil, 100)
---         autocmd BufWritePre *.py lua vim.lsp.buf.formatting_sync(nil, 100)
---     augroup END
--- ]])
