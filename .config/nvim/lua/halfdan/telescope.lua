@@ -5,10 +5,8 @@ require("telescope").load_extension("git_worktree")
 -- Global remapping
 require('telescope').setup {
   defaults = {
-    find_command = {'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case'},
-    file_ignore_patterns = {"_build", "node_modules", "deps" },
-    prompt_position = "bottom",
-    --prompt_prefix = " ",
+    find_command = { 'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
+    file_ignore_patterns = { "_build", "node_modules", "deps" },
     prompt_prefix = "  ",
     selection_caret = " ",
     entry_prefix = "  ",
@@ -16,9 +14,10 @@ require('telescope').setup {
     selection_strategy = "reset",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
-    layout_defaults = {horizontal = {mirror = false}, vertical = {mirror = false}},
-    file_sorter = require'telescope.sorters'.get_fuzzy_file,
-    generic_sorter = require'telescope.sorters'.get_generic_fuzzy_sorter,
+    layout_defaults = { horizontal = { mirror = false }, vertical = { mirror = false } },
+    layout_config = { prompt_position = "bottom" },
+    file_sorter = require 'telescope.sorters'.get_fuzzy_file,
+    generic_sorter = require 'telescope.sorters'.get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
     width = 0.75,
@@ -26,15 +25,15 @@ require('telescope').setup {
     results_height = 1,
     results_width = 0.8,
     border = {},
-    borderchars = {'─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰' },
     color_devicons = true,
     use_less = true,
-    set_env = {['COLORTERM'] = 'truecolor'}, -- default = nil,
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
+    file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require 'telescope.previewers'.vim_buffer_qflist.new,
     -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+    buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker,
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
@@ -59,6 +58,18 @@ require('telescope').setup {
         ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<esc>"] = actions.close,
         -- ["<C-i>"] = my_cool_custom_action,
+      }
+    }
+  },
+  pickers = {
+    buffers = {
+      mappings = {
+        n = {
+          ['d'] = actions.delete_buffer
+        }, -- n
+        i = {
+          ['<c-d>'] = actions.delete_buffer
+        },
       }
     }
   },

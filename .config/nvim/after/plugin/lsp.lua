@@ -21,7 +21,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 -- Setup for nvim-notify
-vim.lsp.set_log_level(1 )
+vim.lsp.set_log_level(2)
 
 local convert_lsp_log_level_to_neovim_log_level = function(lsp_log_level)
   if lsp_log_level == 1 then
@@ -151,6 +151,7 @@ local elixir = require('elixir')
 elixir.setup(config({
   -- repo = "mhanberg/elixir-ls", -- defaults to elixir-lsp/elixir-ls
   -- branch = "mh/all-workspace-symbols", -- defaults to nil, just checkouts out the default branch, mutually exclusive with the `tag` option
+  cmd = {"/usr/local/opt/elixir-ls/rel/language_server.sh"},
   settings = elixir.settings({
     dialyzerEnabled = true,
     fetchDeps = false,
@@ -184,6 +185,12 @@ lspconfig.sumneko_lua.setup(config({
       }
     }
   }
+}))
+
+-- Generic language server. Used to run credo
+lspconfig.efm.setup(config({
+  on_attach = on_attach,
+  filetypes = {"elixir"}
 }))
 
 require('rust-tools').setup({

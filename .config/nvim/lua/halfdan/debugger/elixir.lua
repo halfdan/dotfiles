@@ -2,7 +2,7 @@ local dap = require('dap')
 
 dap.adapters.mix_task = {
   type = 'executable',
-  command = '/home/halfdan/opt/elixir-ls/bin/debugger.sh', -- debugger.bat for windows
+  command = '/usr/local/opt/elixir-ls/rel/debugger.sh', -- debugger.bat for windows
   args = {}
 }
 

@@ -67,16 +67,23 @@ nnoremap('<leader>ta', ':TestSuite<CR>')
 nnoremap('<leader>tl', ':TestLast<CR>')
 nnoremap('<leader>tg', ':TestVisit<CR>')
 
+-- Vim Projectionist
+nnoremap('<leader>a', ':A<CR>')
+
 -- Reload init.lua
 nnoremap('<leader>sv', ':source $MYVIMRC<CR>')
 
-vim.cmd("nnoremap <silent> <C-p> :Lspsaga diagnostic_jump_prev<CR>")
-vim.cmd("nnoremap <silent> <C-n> :Lspsaga diagnostic_jump_next<CR>")
--- -- scroll down hover doc or scroll in definition preview
-vim.cmd("nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>")
--- -- scroll up hover doc
-vim.cmd("nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>")
-vim.cmd('command! -nargs=0 LspVirtualTextToggle lua require("lsp/virtual_text").toggle()')
+nnoremap('<C-p>', ':Lspsaga diagnostic_jump_prev<CR>')
+nnoremap('<C-y>', ':Lspsaga diagnostic_jump_next<CR>')
+
+-- Harpoon
+nnoremap("<leader>m", function() require("harpoon.mark").add_file() end)
+nnoremap("<C-e>", function() require("harpoon.ui").toggle_quick_menu() end)
+
+nnoremap("<C-h>", function() require("harpoon.ui").nav_file(1) end)
+nnoremap("<C-t>", function() require("harpoon.ui").nav_file(2) end)
+nnoremap("<C-n>", function() require("harpoon.ui").nav_file(3) end)
+nnoremap("<C-s>", function() require("harpoon.ui").nav_file(4) end)
 
 -- Yank until end of line
 nnoremap('Y', 'yg$')

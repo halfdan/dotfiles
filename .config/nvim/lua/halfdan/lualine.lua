@@ -1,4 +1,4 @@
-require'lualine'.setup {
+require 'lualine'.setup {
   options = {
     icons_enabled = true,
     theme = 'gruvbox-baby',
@@ -7,18 +7,18 @@ require'lualine'.setup {
     disabled_filetypes = {}
   },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch'},
-    lualine_c = { 'filename', 'diff' },
-    lualine_x = {"require'lsp-status'.status()", 'filetype'},
-    lualine_y = {'progress'},
-    lualine_z = {'location'}
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diff', 'diagnostics' },
+    lualine_c = { 'filename' },
+    lualine_x = { "require'lsp-status'.status()", 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location' }
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {}
   },
@@ -28,9 +28,12 @@ require'lualine'.setup {
     lualine_a = {
     },
     lualine_b = {},
-    lualine_c = {'filename' },
+    lualine_c = { 'filename' },
     lualine_x = {},
     lualine_y = {},
     lualine_z = {}
+  },
+  inactive_winbar = {
+    lualine_c = { 'filename' },
   }
 }

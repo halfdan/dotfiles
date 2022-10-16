@@ -37,7 +37,7 @@ return require("packer").startup({
 
     use 'lewis6991/impatient.nvim'
 
-    use {'TimUntersberger/neogit' }
+    use {'TimUntersberger/neogit', requires = {'sindrets/diffview.nvim' } }
     use {'airblade/vim-gitgutter'}
     -- use {'andymass/vim-matchup'}
 
@@ -52,7 +52,6 @@ return require("packer").startup({
     use {'tpope/vim-dispatch'}
 
     -- Treesitter
-    
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
@@ -86,15 +85,9 @@ return require("packer").startup({
 
     use {'rcarriga/nvim-notify'}
 
-    use {
-      "nvim-neorg/neorg",
-      event = "BufEnter",
-      after = "nvim-treesitter",
-      config = function()
-        require 'halfdan.neorg'
-      end
-    }
-    use {'nvim-neorg/neorg-telescope', after = "neorg"}
+    use { "nvim-neorg/neorg" }
+    use {'nvim-neorg/neorg-telescope'}
+    use{ "mickael-menu/zk-nvim" }
 
     use {'justinmk/vim-sneak'}
 
@@ -107,13 +100,7 @@ return require("packer").startup({
       'williamboman/nvim-lsp-installer',
     }
 
-    use {
-        'L3MON4D3/LuaSnip',
-        event = "InsertEnter",
-        config = function()
-          require 'halfdan.luasnip'
-        end,
-    }
+    use {'L3MON4D3/LuaSnip'}
     use {"rafamadriz/friendly-snippets", after="LuaSnip"}
 
     use {
@@ -127,12 +114,7 @@ return require("packer").startup({
         { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', event = 'CmdlineEnter' },
         {'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' }
-      },
-      config = function()
-        require 'halfdan.cmp'
-      end,
-      event = 'InsertEnter',
-      after = 'LuaSnip',
+      }
     }
 
     use {'glepnir/lspsaga.nvim'}
@@ -140,7 +122,7 @@ return require("packer").startup({
     -- Used to display LSP status in Lualine
     use {'nvim-lua/lsp-status.nvim'}
 
-    --use {'simrat39/symbols-outline.nvim'}
+    use {'simrat39/symbols-outline.nvim'}
     use {
       'numToStr/Comment.nvim',
       config = function()
@@ -150,11 +132,10 @@ return require("packer").startup({
     -- Telescope fuzzy find files/grep
     use {'nvim-lua/popup.nvim'}
     use {'nvim-lua/plenary.nvim'}
-    
     use {'nvim-telescope/telescope.nvim'}
-    
 
     use {'theprimeagen/git-worktree.nvim'}
+    use {'theprimeagen/harpoon'}
 
     -- Debugging
     use("mfussenegger/nvim-dap")
@@ -170,10 +151,12 @@ return require("packer").startup({
     -- vim.g.latex_to_unicode_auto = 1
 
     -- themes & colorschemes
-    use {'arcticicestudio/nord-vim'}
-    use {'joshdick/onedark.vim'}
     use {'gruvbox-community/gruvbox'}
     use {'luisiacc/gruvbox-baby'}
+    use {
+      'https://gitlab.com/__tpb/monokai-pro.nvim',
+      as = 'monokai-pro.nvim'
+    }
   end,
   config = {
     display = {
