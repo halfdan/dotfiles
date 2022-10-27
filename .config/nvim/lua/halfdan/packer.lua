@@ -30,6 +30,7 @@ end
 
 vim.cmd "autocmd BufWritePost plugins.lua PackerCompile" -- Auto compile when there are changes in plugins.lua
 
+vim.opt.runtimepath:append("~/code/jira.nvim")
 return require("packer").startup({
   function(use)
     -- Packer can manage itself as an optional plugin
@@ -113,7 +114,8 @@ return require("packer").startup({
         { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
         { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', event = 'CmdlineEnter' },
-        {'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' }
+        {'tzachar/cmp-tabnine', run = './install.sh', after = 'nvim-cmp' },
+        {'petertriho/cmp-git', after = 'nvim-cmp'},
       }
     }
 
@@ -129,6 +131,8 @@ return require("packer").startup({
         require('Comment').setup()
       end
     }
+    use { 'numToStr/FTerm.nvim' }
+
     -- Telescope fuzzy find files/grep
     use {'nvim-lua/popup.nvim'}
     use {'nvim-lua/plenary.nvim'}

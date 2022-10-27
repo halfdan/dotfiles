@@ -2,25 +2,24 @@ local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local builtin = require("telescope.builtin")
 
-nnoremap("<leader>pg", function()
+nnoremap("<leader>gg", function()
   builtin.live_grep()
 end)
 nnoremap("<C-p>", function()
-  if not pcall(builtin.git_files) then
-    builtin.find_files()
-  end
+  builtin.commands()
 end)
-nnoremap("<Leader>pf", function()
+
+nnoremap("<Leader>ff", function()
   builtin.find_files()
 end)
 
-nnoremap("<Leader>ps", function()
+nnoremap("<Leader>fs", function()
   builtin.lsp_workspace_symbols()
 end)
-nnoremap("<leader>pw", function()
+nnoremap("<leader>gw", function()
   builtin.grep_string { search = vim.fn.expand("<cword>") }
 end)
-nnoremap("<leader>pb", function()
+nnoremap("<leader>fb", function()
   builtin.buffers()
 end)
 nnoremap("<leader>vh", function()
@@ -36,3 +35,5 @@ end)
 nnoremap("<leader>gc", function()
   builtin.git_branches()
 end)
+
+

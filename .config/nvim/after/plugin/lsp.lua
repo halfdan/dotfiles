@@ -127,7 +127,7 @@ local on_attach = function(client, bufnr)
   nnoremap("gr", function() vim.lsp.buf.references() end)
   nnoremap("<leader>rn", function() vim.lsp.buf.rename() end)
   nnoremap("<leader>cl", function() vim.lsp.codelens.run() end)
-  nnoremap("<leader>ff", function() vim.lsp.buf.format{async = true} end)
+  nnoremap("<leader>fa", function() vim.lsp.buf.format{async = true} end)
   inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
 
   lsp_status.on_attach(client, bufnr)
@@ -137,7 +137,7 @@ local function config(_config)
   _config = vim.tbl_deep_extend("force", {
     log_level = vim.lsp.protocol.MessageType.Log,
     message_level = vim.lsp.protocol.MessageType.Log,
-    capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+    capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = on_attach,
   }, _config or {})
 
