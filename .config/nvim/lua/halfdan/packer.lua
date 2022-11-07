@@ -69,7 +69,8 @@ return require("packer").startup({
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
 
-        "jfpedroza/neotest-elixir"
+        "jfpedroza/neotest-elixir",
+        "rouge8/neotest-rust",
       }
     }
     use {"nvim-neotest/neotest-vim-test" }
@@ -124,6 +125,15 @@ return require("packer").startup({
     -- Used to display LSP status in Lualine
     use {'nvim-lua/lsp-status.nvim'}
 
+    -- null-ls for a collection of LSP-like plugins
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+            require("null-ls").setup()
+        end,
+        requires = { "nvim-lua/plenary.nvim" },
+    })
+
     use {'simrat39/symbols-outline.nvim'}
     use {
       'numToStr/Comment.nvim',
@@ -137,6 +147,8 @@ return require("packer").startup({
     use {'nvim-lua/popup.nvim'}
     use {'nvim-lua/plenary.nvim'}
     use {'nvim-telescope/telescope.nvim'}
+    use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use {'nvim-telescope/telescope-dap.nvim'}
 
     use {'theprimeagen/git-worktree.nvim'}
     use {'theprimeagen/harpoon'}

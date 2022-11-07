@@ -31,7 +31,7 @@ vim.o.backup = false -- This is recommended by coc
 vim.o.writebackup = false -- This is recommended by coc
 vim.wo.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
 vim.o.updatetime = 300 -- Faster completion
-vim.o.timeoutlen = 500 -- By default timeoutlen is 1000 ms
+vim.o.timeoutlen = 1000 -- By default timeoutlen is 1000 ms
 vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.laststatus = 3 -- Set global status bar
 vim.b.did_ftplugin = 1
@@ -40,3 +40,8 @@ vim.g.gruvbox_baby_telescope_theme = 1
 vim.g.gruvbox_baby_background_color = "dark"
 
 vim.g.mapleader = ' '
+
+vim.g.netrw_preview = 1 -- Split preview vertically
+vim.g.netrw_alo = 1 -- Show preview window to the right
+vim.g.netrw_winsize = 30 -- Have the preview window take up 70%
+vim.g.netrw_liststyle = 3 -- Use tree style

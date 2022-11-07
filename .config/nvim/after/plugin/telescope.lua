@@ -10,7 +10,12 @@ nnoremap("<C-p>", function()
 end)
 
 nnoremap("<Leader>ff", function()
-  builtin.find_files()
+  builtin.find_files({
+    hidden=true,
+  })
+end)
+nnoremap("<Leader>fh", function()
+  builtin.find_files{cwd=vim.fn.expand('%:p:h')}
 end)
 
 nnoremap("<Leader>fs", function()

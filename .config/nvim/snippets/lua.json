@@ -1,0 +1,10 @@
+{
+    "anonymous-function": {
+        "prefix": "fn",
+        "body": [
+            "function($1)",
+            "\t${0:-- code}",
+            "end"
+        ]
+    }
+}
