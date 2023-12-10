@@ -124,48 +124,6 @@ local function config(_config)
   return _config
 end
 
-local elixir = require("elixir")
-local elixirls = require("elixir.elixirls")
-
-elixir.setup {
-  credo = {},
-  elixirls = {
-    enabled = true,
-    settings = elixirls.settings {
-      dialyzerEnabled = false,
-      enableTestLenses = false,
-    },
-    on_attach = function(client, bufnr)
-      vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-      vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-      vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-    end,
-  }
-}
--- local elixir = require('elixir')
--- elixir.setup(config({
---   -- repo = "mhanberg/elixir-ls", -- defaults to elixir-lsp/elixir-ls
---   -- branch = "mh/all-workspace-symbols", -- defaults to nil, just checkouts out the default branch, mutually exclusive with the `tag` option
---   cmd = {"/opt/elixir-ls/rel/language_server.sh"},
---   settings = elixir.settings({
---     dialyzerEnabled = true,
---     fetchDeps = false,
---     enableTestLenses = true,
---     suggestSpecs = false,
---   }),
---   on_attach = function(client, bufnr)
---     on_attach(client, bufnr)
---
---     local map_opts = { buffer = true, noremap = true}
---
---     -- remove the pipe operator
---     vim.keymap.set("n", "<leader>fp", ":ElixirFromPipe<cr>", map_opts)
---     -- add the pipe operator
---     vim.keymap.set("n", "<leader>tp", ":ElixirToPipe<cr>", map_opts)
---     vim.keymap.set("v", "<leader>em", ":ElixirExpandMacro<cr>", map_opts)
---   end
--- }))
---
 -- Enable the following language servers
 local servers = { 'gopls', 'julials', 'rust_analyzer', 'pyright' }
 for _, lsp in ipairs(servers) do

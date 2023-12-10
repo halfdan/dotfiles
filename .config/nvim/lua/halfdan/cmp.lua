@@ -6,7 +6,6 @@ local source_mapping = {
   nvim_lsp = "[LSP]",
   nvim_lua = "[Lua]",
   path = "[Path]",
-  luasnip = "[Snippet]",
   jira = "[Jira]",
 }
 
@@ -21,8 +20,8 @@ cmp.setup({
   preselect = cmp.PreselectMode.None,
   snippet = {
     expand = function(args)
-      require'luasnip'.lsp_expand(args.body)
-    end,
+      vim.snippet.expand(args.body)
+    end
   },
   mapping = {
     ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
@@ -36,10 +35,10 @@ cmp.setup({
       select = false, -- only replace if explicitly selected
     },
     ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
+      if cmp.visible() then 
         cmp.select_next_item()
-      elseif require'luasnip'.expand_or_jumpable() then
-        require'luasnip'.expand_or_jump()
+      elseif vim.snippet.jumpable(1) then
+        vim.snippet.jump(1)
       elseif has_words_before() then
         cmp.complete()
       else
@@ -50,8 +49,8 @@ cmp.setup({
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif require'luasnip'.jumpable(-1) then
-        require'luasnip'.jump(-1)
+      elseif vim.snippet.jumpable(-1) then
+        vim.snippet.jump(-1)
       else
         fallback()
       end

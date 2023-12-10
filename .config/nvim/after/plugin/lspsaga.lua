@@ -2,17 +2,6 @@ if vim.g.vscode then
   return
 end
 
-local saga = require 'lspsaga'
-saga.setup({
-  -- symbols in winbar
-  -- symbol_in_winbar = {
-  --   enable = true,
-  --   click_support = true,
-  --   show_file = true,
-  --   in_custom = true,
-  -- },
-})
-
 local function get_file_name(include_path)
     local file_name = require('lspsaga.symbolwinbar').get_file_name()
     if vim.fn.bufname '%' == '' then return '' end

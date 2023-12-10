@@ -1,5 +1,3 @@
-require("halfdan.packer")
-
 require("halfdan.settings")
 
 if vim.g.vscode then
@@ -7,15 +5,14 @@ if vim.g.vscode then
 else
     -- ordinary Neovim
   vim.notify = require("notify")
-
-  require("impatient")
+  require("halfdan.lazy")
 
   require("halfdan.neogit")
-  require("halfdan.neorg")
+  -- require("halfdan.neorg")
   require('halfdan.globals')
   require('halfdan.keymap')
   require('halfdan.cmp')
-  require('halfdan.luasnip')
+  -- require('halfdan.luasnip')
   require('halfdan.colorscheme')
   require('halfdan.treesitter')
   require('halfdan.telescope')
