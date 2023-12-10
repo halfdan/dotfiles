@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local Worktree = require("git-worktree")
 local Job = require("plenary.job")
 local FTerm = require("FTerm")

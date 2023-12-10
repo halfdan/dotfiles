@@ -3,7 +3,7 @@ local neorg = require("neorg")
 neorg.setup({
   load = {
     ["core.defaults"] = {},
-    ["core.norg.dirman"] = {
+    ["core.dirman"] = {
       config = {
         workspaces = {
           work = "~/org/work",
@@ -11,27 +11,17 @@ neorg.setup({
         }
       }
     },
-    ["core.gtd.base"] = {
-      config = {
-        workspace = "work",
-      },
-    },
-    ["core.norg.completion"] = {
+    ["core.completion"] = {
       config = {
         engine = "nvim-cmp",
       },
     },
-    ["core.norg.concealer"] = {},
-    ["core.norg.journal"] = {
+    ["core.concealer"] = {},
+    ["core.journal"] = {
       config = {
         strategy = "flat",
       },
     },
     ["core.integrations.telescope"] = {},
-    ["core.norg.esupports.metagen"] = {
-      config = {
-        type = "auto",
-      },
-    },
   }
 })

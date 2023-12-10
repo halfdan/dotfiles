@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local ok, nls = pcall(require, 'null-ls')
 
 if not ok then

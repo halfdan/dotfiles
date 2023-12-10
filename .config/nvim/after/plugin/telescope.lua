@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local builtin = require("telescope.builtin")
@@ -10,9 +14,10 @@ nnoremap("<C-p>", function()
 end)
 
 nnoremap("<Leader>ff", function()
-  builtin.find_files({
-    hidden=true,
-  })
+  require('telescope').extensions.smart_open.smart_open({cwd_only = true})
+  -- builtin.find_files({
+  --   hidden=true,
+  -- })
 end)
 nnoremap("<Leader>fh", function()
   builtin.find_files{cwd=vim.fn.expand('%:p:h')}

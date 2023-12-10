@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 local nnoremap = require('halfdan.keymap').nnoremap
 local neotest = require('neotest')
 
@@ -6,6 +10,7 @@ neotest.setup({
   adapters = {
     require("neotest-elixir")({
       args = { "--trace" },
+      write_delay = 0,
     }),
     require("neotest-rust"),
     --    require("neotest-vim-test")({ allow_file_types = { "haskell"} }),

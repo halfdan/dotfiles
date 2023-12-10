@@ -4,7 +4,7 @@ local actions = require('telescope.actions')
 require('telescope').setup {
   defaults = {
     -- find_command = { 'rg', '--no-heading', '--with-filename', '--line-number', '--column', '--smart-case' },
-    file_ignore_patterns = { "_build", "node_modules", "deps" },
+    file_ignore_patterns = { "_build", "node_modules", "deps", ".git", ".elixir_ls" },
     prompt_prefix = "  ",
     selection_caret = " ",
     entry_prefix = "  ",
@@ -63,3 +63,4 @@ require('telescope').setup {
 require("telescope").load_extension("git_worktree")
 require('telescope').load_extension("fzf")
 require('telescope').load_extension("dap")
+require('telescope').load_extension("smart_open")

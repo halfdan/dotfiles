@@ -150,6 +150,13 @@ return require("packer").startup({
     use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     use {'nvim-telescope/telescope-dap.nvim'}
 
+
+    use {
+      "danielfalk/smart-open.nvim",
+      branch = "0.1.x",
+      requires = {"kkharji/sqlite.lua"}
+    }
+
     use {'theprimeagen/git-worktree.nvim'}
     use {'theprimeagen/harpoon'}
 
@@ -161,7 +168,8 @@ return require("packer").startup({
     -- => Language Support
     use {'rust-lang/rust.vim'}
     use {'simrat39/rust-tools.nvim'}
-    use({ "mhanberg/elixir.nvim", requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" }})
+    -- use({ "mhanberg/elixir.nvim", requires = { "neovim/nvim-lspconfig", "nvim-lua/plenary.nvim" }})
+    use {"elixir-tools/elixir-tools.nvim", requires = { "nvim-lua/plenary.nvim" }}
     use {'tpope/vim-projectionist'}
     -- use {'JuliaEditorSupport/julia-vim', opt=true}
     -- vim.g.latex_to_unicode_auto = 1

@@ -1,5 +1,3 @@
-vim.notify = require("notify")
-
 vim.opt.iskeyword:append("-") -- treat dash separated words as a word text object"
 vim.opt.shortmess:append("c") -- Don't pass messages to |ins-completion-menu|.
 vim.opt.inccommand = "split" -- Make substitution work in realtime
@@ -44,4 +42,4 @@ vim.g.mapleader = ' '
 vim.g.netrw_preview = 1 -- Split preview vertically
 vim.g.netrw_alo = 1 -- Show preview window to the right
 vim.g.netrw_winsize = 30 -- Have the preview window take up 70%
-vim.g.netrw_liststyle = 3 -- Use tree style
+-- vim.g.netrw_liststyle = 3 -- Use tree style

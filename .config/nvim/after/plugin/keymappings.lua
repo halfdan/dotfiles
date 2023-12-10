@@ -1,3 +1,4 @@
+
 local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
@@ -5,17 +6,23 @@ local inoremap = Remap.inoremap
 local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
--- better window movement
--- nnoremap('<C-h>', '<C-w>h')
--- nnoremap('<C-j>', '<C-w>j')
--- nnoremap('<C-k>', '<C-w>k')
--- nnoremap('<C-l>', '<C-w>l')
+-- Yank until end of line
+nnoremap('Y', 'yg$')
+-- Next item, but center line
+nnoremap('n', 'nzzzv')
+nnoremap('N', 'Nzzzv')
+-- Join line but keep cursor intact
+nnoremap('J', 'mzJ`z')
 
--- resize with arrows
-nnoremap('<C-Up>', ':resize -2<CR>')
-nnoremap('<C-Down>', ':resize +2<CR>')
-nnoremap('<C-Left>', ':vertical resize -2<CR>')
-nnoremap('<C-Right>', ':vertical resize +2<CR>')
+-- Move selected line / block of text in visual mode
+xnoremap('J', ':move \'>+1<CR>gv-gv')
+xnoremap('K', ':move \'<-2<CR>gv-gv')
+
+nnoremap('Q', '<Nop>')
+
+-- better indenting
+vnoremap('<', '<gv')
+vnoremap('>', '>gv')
 
 -- improved keyboard support for navigation (especially terminal)
 nnoremap('<leader>h', '<C-w>h')
@@ -31,6 +38,17 @@ nnoremap('<A-l>', '<C-w>l')
 nnoremap('<leader>th', '<C-w>t<C-w>H')
 nnoremap('<leader>tk', '<C-w>t<C-w>K')
 
+-- Keybindings below this are neovim cli only
+if vim.g.vscode then
+  return
+end
+
+-- resize with arrows
+nnoremap('<C-Up>', ':resize -2<CR>')
+nnoremap('<C-Down>', ':resize +2<CR>')
+nnoremap('<C-Left>', ':vertical resize -2<CR>')
+nnoremap('<C-Right>', ':vertical resize +2<CR>')
+
 -- Make adjusting split sizes a bit more friendly
 vim.cmd([[
     noremap <silent> <C-Left> :vertical resize +3<CR>
@@ -38,10 +56,6 @@ vim.cmd([[
     noremap <silent> <C-Up> :resize +3<CR>
     noremap <silent> <C-Down> :resize -3<CR>
 ]])
-
--- better indenting
-vnoremap('<', '<gv')
-vnoremap('>', '>gv')
 
 -- Tab switch buffer
 nnoremap('<TAB>', ':bnext<CR>')
@@ -51,11 +65,6 @@ nnoremap('<S-TAB>', ':bprevious<CR>')
 nnoremap('[q', ':cprev<CR>')
 nnoremap(']q', ':cnext<CR>')
 
--- Move selected line / block of text in visual mode
-xnoremap('J', ':move \'>+1<CR>gv-gv')
-xnoremap('K', ':move \'<-2<CR>gv-gv')
-
-nnoremap('Q', '<Nop>')
 
 -- Tagbar
 nnoremap('<Leader>hl', ':nohl<CR>')
@@ -85,10 +94,3 @@ nnoremap("<C-t>", function() require("harpoon.ui").nav_file(2) end)
 nnoremap("<C-n>", function() require("harpoon.ui").nav_file(3) end)
 nnoremap("<C-s>", function() require("harpoon.ui").nav_file(4) end)
 
--- Yank until end of line
-nnoremap('Y', 'yg$')
--- Next item, but center line
-nnoremap('n', 'nzzzv')
-nnoremap('N', 'Nzzzv')
--- Join line but keep cursor intact
-nnoremap('J', 'mzJ`z')

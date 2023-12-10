@@ -1,3 +1,7 @@
+if vim.g.vscode then
+  return
+end
+
 require('nvim-treesitter.configs').setup({
   ensure_installed = { "python", "go", "elixir", "rust", "gomod", "json", "lua", "ruby", "yaml", "norg", "query" },
   ignore_install = { "haskell" },

@@ -1,5 +1,9 @@
+if vim.g.vscode then
+  return
+end
+
 local saga = require 'lspsaga'
-saga.init_lsp_saga({
+saga.setup({
   -- symbols in winbar
   -- symbol_in_winbar = {
   --   enable = true,
