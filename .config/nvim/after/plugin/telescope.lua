@@ -7,7 +7,8 @@ local nnoremap = Remap.nnoremap
 local builtin = require("telescope.builtin")
 
 nnoremap("<leader>gg", function()
-  builtin.live_grep()
+  -- builtin.live_grep()
+  require "telescope".extensions.egrepify.egrepify { sorting_strategy = 'ascending' }
 end)
 nnoremap("<C-p>", function()
   builtin.commands()

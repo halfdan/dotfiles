@@ -8,5 +8,5 @@ neogit.setup {
 }
 
 nnoremap("<leader>gs", function()
-    neogit.open({ })
+    neogit.open({kind='split'})
 end)

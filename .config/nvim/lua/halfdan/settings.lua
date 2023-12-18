@@ -7,6 +7,26 @@ vim.o.titlestring="%<%F%=%l/%L - nvim"
 vim.wo.wrap = false -- Display long lines as just one line
 -- vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
 -- vim.cmd('syntax on') -- syntax highlighting
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+local fcs = vim.opt.fillchars:get()
+
+-- Stolen from Akinsho
+local function get_fold(lnum)
+	if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then return ' ' end
+	return vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
+end 
+
+_G.get_statuscol = function()
+	return "%s%=" .. get_fold(vim.v.lnum) .. " %l  "
+end
+
+
+vim.o.statuscolumn = "%!v:lua.get_statuscol()"
+vim.o.foldcolumn = '0'
+vim.o.foldlevelstart = 99
+vim.o.foldlevel = 99 -- Keep folds open by default
 vim.o.pumheight = 10 -- Makes popup menu smaller
 vim.o.fileencoding = "utf-8" -- The encoding written to file
 vim.o.cmdheight = 1 -- More space for displaying messages
@@ -21,7 +41,7 @@ vim.o.shiftwidth = 2 -- Change the number of space characters inserted for inden
 vim.o.expandtab = true -- Converts tabs to spaces
 vim.bo.smartindent = false -- Makes indenting smart
 vim.wo.number = true -- set numbered lines
-vim.wo.relativenumber = true -- set relative number
+-- vim.wo.relativenumber = true -- set relative number
 vim.wo.cursorline = true -- Enable highlighting of the current line
 vim.o.showtabline = 1 -- Always show tabs
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore

@@ -4,8 +4,8 @@ if vim.g.vscode then
     -- VSCode extension
 else
     -- ordinary Neovim
-  vim.notify = require("notify")
   require("halfdan.lazy")
+  vim.notify = require("notify")
 
   require("halfdan.neogit")
   -- require("halfdan.neorg")

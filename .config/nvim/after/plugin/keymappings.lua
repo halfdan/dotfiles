@@ -40,6 +40,12 @@ nnoremap('<leader>tk', '<C-w>t<C-w>K')
 
 -- Keybindings below this are neovim cli only
 if vim.g.vscode then
+  -- Toggle Comment
+  vim.keymap.set('x', 'gc', '<Plug>VSCodeCommentary', {})
+  vim.keymap.set('n', 'gc', '<Plug>VSCodeCommentary', {})
+  vim.keymap.set('o', 'gc', '<Plug>VSCodeCommentary', {})
+  vim.keymap.set('n', 'gcc', '<Plug>VSCodeCommentaryLine', {})
+
   return
 end
 
@@ -65,6 +71,16 @@ nnoremap('<S-TAB>', ':bprevious<CR>')
 nnoremap('[q', ':cprev<CR>')
 nnoremap(']q', ':cnext<CR>')
 
+-- no arrow keys
+nnoremap("<up>", "<nop>")
+nnoremap("<down>", "<nop>")
+nnoremap("<left>", "<nop>")
+nnoremap("<right>", "<nop>")
+
+inoremap("<up>", "<nop>")
+inoremap("<down>", "<nop>")
+inoremap("<left>", "<nop>")
+inoremap("<right>", "<nop>")
 
 -- Tagbar
 nnoremap('<Leader>hl', ':nohl<CR>')

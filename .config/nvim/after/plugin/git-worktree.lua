@@ -118,3 +118,12 @@ vim.api.nvim_create_autocmd('User', {
     deps_job:start()
   end,
 })
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'NeogitBranchCheckout',
+  group = group,
+  callback = function ()
+    deps_job:and_then(compile_job)
+    deps_job:start()
+  end,
+})

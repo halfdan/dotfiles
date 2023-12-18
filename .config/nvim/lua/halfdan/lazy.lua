@@ -11,8 +11,21 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+if vim.g.vscode then
+  return
+end
+
 require("lazy").setup({
-    {'TimUntersberger/neogit', dependencies = {'sindrets/diffview.nvim' } },
+    {
+      "NeogitOrg/neogit",
+      dependencies = {
+        "nvim-lua/plenary.nvim",         -- required
+        "nvim-telescope/telescope.nvim", -- optional
+        "sindrets/diffview.nvim",        -- optional
+        "ibhagwan/fzf-lua",              -- optional
+      },
+      config = true
+    },
     {'airblade/vim-gitgutter'},
 
     -- Load .editorconfig files
@@ -50,7 +63,7 @@ require("lazy").setup({
 
 
     {'preservim/tagbar'},
-    
+
     -- Status Line and Bufferline
     {
       'nvim-lualine/lualine.nvim',
@@ -65,7 +78,7 @@ require("lazy").setup({
     {'justinmk/vim-sneak'},
 
     {'machakann/vim-highlightedyank'},
-    
+
     -- LSP / Language Server Protocol
     {
       'neovim/nvim-lspconfig',
@@ -108,17 +121,21 @@ require("lazy").setup({
         dependencies = { "nvim-lua/plenary.nvim" },
     },
 
-    {'simrat39/symbols-outline.nvim'},
+    {'simrat39/symbols-outline.nvim', config=true},
     {
       'numToStr/Comment.nvim',
       config = function()
         require('Comment').setup()
       end
     },
-    
+
     -- Telescope fuzzy find files/grep
     {'nvim-lua/popup.nvim'},
     {'nvim-lua/plenary.nvim'},
+    {
+        "fdschmidt93/telescope-egrepify.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    },
     {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     {'nvim-telescope/telescope.nvim'},
     {'nvim-telescope/telescope-dap.nvim'},
@@ -144,27 +161,27 @@ require("lazy").setup({
       "elixir-tools/elixir-tools.nvim",
       version = "*",
       event = { "BufReadPre", "BufNewFile" },
-      -- config = function()
-      --   local elixir = require("elixir")
-      --   local elixirls = require("elixir.elixirls")
-
-      --   elixir.setup {
-      --     nextls = {enable = true},
-      --     credo = {},
-      --     elixirls = {
-      --       enable = false,
-      --       settings = elixirls.settings {
-      --         dialyzerEnabled = false,
-      --         enableTestLenses = false,
-      --       },
-      --       on_attach = function(client, bufnr)
-      --         vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-      --         vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-      --         vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-      --       end,
-      --     }
-      --   }
-      -- end,
+      config = function()
+        local elixir = require("elixir")
+        local elixirls = require("elixir.elixirls")
+--
+        elixir.setup {
+          nextls = {enable = false},
+          credo = {},
+          elixirls = {
+            enable = true,
+            settings = elixirls.settings {
+              dialyzerEnabled = false,
+              enableTestLenses = false,
+            },
+            on_attach = function()
+              vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
+              vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
+              vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
+            end,
+          }
+        }
+      end,
       dependencies = {
         "nvim-lua/plenary.nvim",
       },
