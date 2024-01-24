@@ -218,7 +218,7 @@ require('rust-tools').setup({
 
 local lexical_config = {
   filetypes = { "elixir", "eelixir", "heex" },
-  cmd = { "/Users/halfdan/code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
+  cmd = { "/Users/fbecker/code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
   settings = {},
 }
 

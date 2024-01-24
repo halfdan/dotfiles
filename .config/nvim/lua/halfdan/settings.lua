@@ -54,8 +54,8 @@ vim.o.clipboard = "unnamedplus" -- Copy paste between vim and everything else
 vim.o.laststatus = 3 -- Set global status bar
 vim.b.did_ftplugin = 1
 -- Enable telescope theme
-vim.g.gruvbox_baby_telescope_theme = 1
-vim.g.gruvbox_baby_background_color = "dark"
+-- vim.g.gruvbox_baby_telescope_theme = 1
+-- vim.g.gruvbox_baby_background_color = "dark"
 
 vim.g.mapleader = ' '
 

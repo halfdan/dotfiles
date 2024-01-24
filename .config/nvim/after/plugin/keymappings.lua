@@ -3,6 +3,7 @@ local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
 local inoremap = Remap.inoremap
+local tnoremap = Remap.tnoremap
 local xnoremap = Remap.xnoremap
 local nmap = Remap.nmap
 
@@ -38,6 +39,9 @@ nnoremap('<A-l>', '<C-w>l')
 nnoremap('<leader>th', '<C-w>t<C-w>H')
 nnoremap('<leader>tk', '<C-w>t<C-w>K')
 
+nnoremap("<leader>\\", ":vsplit<CR>")
+nnoremap("<leader>/", ":split<CR>")
+
 -- Keybindings below this are neovim cli only
 if vim.g.vscode then
   -- Toggle Comment
@@ -49,6 +53,9 @@ if vim.g.vscode then
   return
 end
 
+tnoremap('<ESC>', '<C-\\><C-n>')
+
+nnoremap('<C-B>', ':Neotree right toggle<CR>')
 -- resize with arrows
 nnoremap('<C-Up>', ':resize -2<CR>')
 nnoremap('<C-Down>', ':resize +2<CR>')

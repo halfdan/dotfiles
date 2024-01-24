@@ -9,14 +9,14 @@ else
 
   require("halfdan.neogit")
   -- require("halfdan.neorg")
-  require('halfdan.globals')
+  -- require('halfdan.globals')
   require('halfdan.keymap')
   require('halfdan.cmp')
   -- require('halfdan.luasnip')
   require('halfdan.colorscheme')
   require('halfdan.treesitter')
   require('halfdan.telescope')
-  require('halfdan.lualine')
+  -- require('halfdan.lualine')
 
   require('halfdan.autocmds')
 

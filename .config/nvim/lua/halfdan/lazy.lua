@@ -60,15 +60,34 @@ require("lazy").setup({
       }
     },
     {"nvim-neotest/neotest-vim-test" },
-
+    {'akinsho/toggleterm.nvim', version = "*", config = function()
+      require('toggleterm').setup({
+        open_mapping = [[<C-\>]],
+        start_in_insert = true,
+        direction = "horizontal",
+        autochdir = false,
+        size = 20,
+        highlights = {
+          FloatBorder = { link = "ToggleTermBorder" },
+          Normal = { link = "ToggleTerm" },
+          NormalFloat = { link = "ToggleTerm" },
+        },
+        winbar = {
+          enabled = true,
+          name_formatter = function(term)
+            return term.name
+          end,
+        },
+      })
+    end},
 
     {'preservim/tagbar'},
 
     -- Status Line and Bufferline
-    {
-      'nvim-lualine/lualine.nvim',
-      dependencies = {'kyazdani42/nvim-web-devicons'}
-    },
+    -- {
+    --   'nvim-lualine/lualine.nvim',
+    --   dependencies = {'kyazdani42/nvim-web-devicons'}
+    -- },
 
     {'rcarriga/nvim-notify'},
 
@@ -88,7 +107,12 @@ require("lazy").setup({
     {
         'nvimdev/lspsaga.nvim',
         config = function()
-            require('lspsaga').setup({})
+            require('lspsaga').setup({
+
+              symbol_in_winbar = {
+                enable = false,
+              },
+            })
         end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter', -- optional
@@ -188,13 +212,123 @@ require("lazy").setup({
     },
     {'tpope/vim-projectionist'},
     -- themes & colorschemes
-    {'gruvbox-community/gruvbox'},
+    -- {'gruvbox-community/gruvbox'},
     {'luisiacc/gruvbox-baby'},
     {
-      'https://gitlab.com/__tpb/monokai-pro.nvim',
-      as = 'monokai-pro.nvim'
+      'https://github.com/loctvl842/monokai-pro.nvim',
+      as = 'monokai-pro.nvim',
+      config = function ()
+        local monokai = require("monokai-pro")
+        monokai.setup({
+          transparent_background = false,
+          terminal_colors = true,
+          devicons = true, -- highlight the icons of `nvim-web-devicons`
+          styles = {
+            comment = { italic = true },
+            keyword = { italic = true }, -- any other keyword
+            type = { italic = true }, -- (preferred) int, long, char, etc
+            storageclass = { italic = true }, -- static, register, volatile, etc
+            structure = { italic = true }, -- struct, union, enum, etc
+            parameter = { italic = true }, -- parameter pass in function
+            annotation = { italic = true },
+            tag_attribute = { italic = true }, -- attribute of tag in reactjs
+          },
+          filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
+          -- Enable this will disable filter option
+          day_night = {
+            enable = false, -- turn off by default
+            day_filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
+            night_filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
+          },
+          inc_search = "background", -- underline | background
+          background_clear = {
+            "nvim-tree",
+            "neo-tree",
+            "bufferline",
+            "telescope",
+            "toggleterm",
+          },
+          plugins = {
+            bufferline = {
+              underline_selected = false,
+              underline_visible = false,
+            },
+            indent_blankline = {
+              context_highlight = "default", -- default | pro
+              context_start_underline = false,
+            },
+          },
+          override = function(c)
+            return {
+              ColorColumn = { bg = c.base.dimmed3 },
+            }
+          end,
+        })
+        monokai.load()
+      end
     },
-
+    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',
+      keys = {
+        { "<C-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Go to buffer 1" },
+        { "<C-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "Go to buffer 2" },
+        { "<C-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "Go to buffer 3" },
+        { "<C-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "Go to buffer 4" },
+        { "<C-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "Go to buffer 5" },
+        { "<C-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "Go to buffer 6" },
+        { "<C-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "Go to buffer 7" },
+        { "<C-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "Go to buffer 8" },
+        { "<C-9>", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "Go to buffer 9" },
+        { "<S-l>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
+        { "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous buffer" },
+        { "<A-S-l>", "<Cmd>BufferLineMoveNext<CR>", desc = "Move buffer right" },
+        { "<A-S-h>", "<Cmd>BufferLineMovePrev<CR>", desc = "Move buffer left" },
+      },
+      opts = function()
+        local monokai_opts = require("halfdan.util").opts("monokai-pro.nvim")
+        return {
+          options = {
+            diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
+            -- separator_style = "", -- | "thick" | "thin" | "slope" | { 'any', 'any' },
+            separator_style = { "", "" }, -- | "thick" | "thin" | { 'any', 'any' },
+            -- separator_style = "slant", -- | "thick" | "thin" | { 'any', 'any' },
+            indicator = {
+              -- icon = " ",
+              -- style = 'icon',
+              style = "underline",
+            },
+            close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+            diagnostics_indicator = function(count, _, _, _)
+              if count > 9 then
+                return "9+"
+              end
+              return tostring(count)
+            end,
+            numbers = function(opts)
+              return string.format('%s', opts.raise(opts.ordinal))
+            end,
+            offsets = {
+              {
+                filetype = "neo-tree",
+                text = "EXPLORER",
+                text_align = "center",
+                separator = vim.tbl_contains(monokai_opts.background_clear or {}, "neo-tree"), -- set to `true` if clear background of neo-tree
+              },
+              {
+                filetype = "NvimTree",
+                text = "EXPLORER",
+                text_align = "center",
+                separator = vim.tbl_contains(monokai_opts.background_clear or {}, "nvim-tree"), -- set to `true` if clear background of neo-tree
+              },
+            },
+            hover = {
+              enabled = true,
+              delay = 0,
+              reveal = { "close" },
+            },
+          },
+        }
+      end,
+    },
     {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",

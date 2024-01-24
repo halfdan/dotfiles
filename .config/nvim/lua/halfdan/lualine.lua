@@ -9,7 +9,7 @@ end
 require 'lualine'.setup {
   options = {
     icons_enabled = true,
-    theme = 'monokaipro',
+    theme = 'monokai-pro',
     --component_separators = {'', ''},
     --section_separators = {'', ''},
     disabled_filetypes = {}

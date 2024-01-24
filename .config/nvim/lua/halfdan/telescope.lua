@@ -8,6 +8,7 @@ require('telescope').setup {
     prompt_prefix = "  ",
     selection_caret = " ",
     entry_prefix = "  ",
+    -- borderchars = { "█", " ", "▀", "█", "█", " ", " ", "▀" },
     file_sorter = require 'telescope'.extensions.fzf.get_fzf_sorter,
     -- Developer configurations: Not meant for general override
     mappings = {
