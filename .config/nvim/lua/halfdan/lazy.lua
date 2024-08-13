@@ -83,23 +83,39 @@ require("lazy").setup({
 
     {'preservim/tagbar'},
 
+    {'f-person/git-blame.nvim'},
     -- Status Line and Bufferline
-    -- {
-    --   'nvim-lualine/lualine.nvim',
-    --   dependencies = {'kyazdani42/nvim-web-devicons'}
-    -- },
-
-    {'rcarriga/nvim-notify'},
-
-    -- { "nvim-neorg/neorg" },
-    -- {'nvim-neorg/neorg-telescope'},
-
-    {'justinmk/vim-sneak'},
-
-    {'machakann/vim-highlightedyank'},
-
-    -- LSP / Language Server Protocol
     {
+      'nvim-lualine/lualine.nvim',
+      dependencies = {'kyazdani42/nvim-web-devicons'},
+      event = { "BufReadPost", "BufNewFile" },
+      opts = function()
+        local monokai_opts = require("halfdan.util").opts("monokai-pro.nvim")
+        return {
+          float = vim.tbl_contains(monokai_opts.background_clear or {}, "neo-tree"),
+          separator = "bubble", -- bubble | triangle
+          ---@type any
+          colorful = true,
+        }
+      end,
+      config = function(_, opts)
+        local lualine_config = require("halfdan.lualine")
+        lualine_config.setup(opts)
+        lualine_config.load()
+        end,
+      },
+
+      {'rcarriga/nvim-notify'},
+
+      -- { "nvim-neorg/neorg" },
+      -- {'nvim-neorg/neorg-telescope'},
+
+      {'justinmk/vim-sneak'},
+
+      {'machakann/vim-highlightedyank'},
+
+      -- LSP / Language Server Protocol
+      {
       'neovim/nvim-lspconfig',
       'williamboman/nvim-lsp-installer',
     },
@@ -176,6 +192,7 @@ require("lazy").setup({
     -- Debugging
     "mfussenegger/nvim-dap",
     "rcarriga/nvim-dap-ui",
+    "nvim-neotest/nvim-nio",
     "theHamsta/nvim-dap-virtual-text",
 
     -- => Language Support
@@ -190,10 +207,10 @@ require("lazy").setup({
         local elixirls = require("elixir.elixirls")
 --
         elixir.setup {
-          nextls = {enable = false},
+          nextls = {enable = true},
           credo = {},
           elixirls = {
-            enable = true,
+            enable = false,
             settings = elixirls.settings {
               dialyzerEnabled = false,
               enableTestLenses = false,

@@ -63,3 +63,7 @@ vim.g.netrw_preview = 1 -- Split preview vertically
 vim.g.netrw_alo = 1 -- Show preview window to the right
 vim.g.netrw_winsize = 30 -- Have the preview window take up 70%
 -- vim.g.netrw_liststyle = 3 -- Use tree style
+--
+vim.g.gitblame_display_virtual_text = 0
+vim.g.gitblame_date_format = '%r'
+vim.g.gitblame_message_template = '<author> • <date>'
