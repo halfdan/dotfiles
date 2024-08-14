@@ -8,7 +8,6 @@ else
   vim.notify = require("notify")
 
   require("halfdan.neogit")
-  -- require("halfdan.neorg")
   -- require('halfdan.globals')
   require('halfdan.keymap')
   require('halfdan.cmp')

@@ -107,8 +107,40 @@ require("lazy").setup({
 
       {'rcarriga/nvim-notify'},
 
-      -- { "nvim-neorg/neorg" },
-      -- {'nvim-neorg/neorg-telescope'},
+      {
+          "nvim-neorg/neorg",
+          lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+          version = "*", -- Pin Neorg to the latest stable release
+          config = function()
+            require('neorg').setup({
+              load = {
+                ["core.defaults"] = {},
+                ["core.dirman"] = {
+                  config = {
+                    workspaces = {
+                      work = "~/org/work",
+                      home = "~/org/home",
+                    },
+                    index = "index.norg",
+                  }
+                },
+                ["core.completion"] = {
+                  config = {
+                    engine = "nvim-cmp",
+                  },
+                },
+                ["core.concealer"] = {},
+                ["core.journal"] = {
+                  config = {
+                    strategy = "flat",
+                  },
+                },
+                ["core.integrations.telescope"] = {},
+              }
+            })
+        end,
+      },
+      {'nvim-neorg/neorg-telescope'},
 
       {'justinmk/vim-sneak'},
 
@@ -230,60 +262,8 @@ require("lazy").setup({
     {'tpope/vim-projectionist'},
     -- themes & colorschemes
     -- {'gruvbox-community/gruvbox'},
+    { "rose-pine/neovim", name = "rose-pine" },
     {'luisiacc/gruvbox-baby'},
-    {
-      'https://github.com/loctvl842/monokai-pro.nvim',
-      as = 'monokai-pro.nvim',
-      config = function ()
-        local monokai = require("monokai-pro")
-        monokai.setup({
-          transparent_background = false,
-          terminal_colors = true,
-          devicons = true, -- highlight the icons of `nvim-web-devicons`
-          styles = {
-            comment = { italic = true },
-            keyword = { italic = true }, -- any other keyword
-            type = { italic = true }, -- (preferred) int, long, char, etc
-            storageclass = { italic = true }, -- static, register, volatile, etc
-            structure = { italic = true }, -- struct, union, enum, etc
-            parameter = { italic = true }, -- parameter pass in function
-            annotation = { italic = true },
-            tag_attribute = { italic = true }, -- attribute of tag in reactjs
-          },
-          filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
-          -- Enable this will disable filter option
-          day_night = {
-            enable = false, -- turn off by default
-            day_filter = "classic", -- classic | octagon | pro | machine | ristretto | spectrum
-            night_filter = "spectrum", -- classic | octagon | pro | machine | ristretto | spectrum
-          },
-          inc_search = "background", -- underline | background
-          background_clear = {
-            "nvim-tree",
-            "neo-tree",
-            "bufferline",
-            "telescope",
-            "toggleterm",
-          },
-          plugins = {
-            bufferline = {
-              underline_selected = false,
-              underline_visible = false,
-            },
-            indent_blankline = {
-              context_highlight = "default", -- default | pro
-              context_start_underline = false,
-            },
-          },
-          override = function(c)
-            return {
-              ColorColumn = { bg = c.base.dimmed3 },
-            }
-          end,
-        })
-        monokai.load()
-      end
-    },
     {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',
       keys = {
         { "<C-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Go to buffer 1" },
