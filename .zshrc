@@ -31,9 +31,3 @@ SAVEHIST=10000
 #compinit
 #setopt COMPLETE_ALIASES
 
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
-
-# goodies
-eval "$(direnv hook zsh)"
-eval "$(starship init zsh)"

@@ -239,13 +239,13 @@ require("lazy").setup({
         local elixirls = require("elixir.elixirls")
 --
         elixir.setup {
-          nextls = {enable = true},
+          nextls = {enable = false},
           credo = {},
           elixirls = {
-            enable = false,
+            enable = true,
             settings = elixirls.settings {
               dialyzerEnabled = false,
-              enableTestLenses = false,
+              enableTestLenses = true,
             },
             on_attach = function()
               vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })

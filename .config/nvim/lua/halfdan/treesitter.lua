@@ -3,7 +3,7 @@ if vim.g.vscode then
 end
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { "python", "go", "elixir", "heex", "rust", "gomod", "json", "lua", "yaml", "norg", "query", "markdown", "markdown_inline"},
+  ensure_installed = { "python", "go", "elixir", "heex", "rust", "gomod", "json", "lua", "yaml", "norg", "query", "markdown", "markdown_inline", "gleam"},
   ignore_install = { "haskell" },
   highlight = {
     enable = true,

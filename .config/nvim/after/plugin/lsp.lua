@@ -238,3 +238,5 @@ end
 
 lspconfig.lexical.setup({})
 
+lspconfig.gleam.setup({})
+

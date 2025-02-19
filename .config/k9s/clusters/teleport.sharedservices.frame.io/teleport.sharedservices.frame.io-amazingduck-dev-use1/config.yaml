@@ -1,0 +1,13 @@
+k9s:
+  cluster: teleport.sharedservices.frame.io
+  namespace:
+    active: backend
+    lockFavorites: false
+    favorites:
+    - backend
+    - default
+  view:
+    active: po
+  featureGates:
+    nodeShell: false
+  portForwardAddress: localhost
