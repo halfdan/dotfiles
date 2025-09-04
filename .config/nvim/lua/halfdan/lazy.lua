@@ -51,10 +51,12 @@ require("lazy").setup({
     {
       "nvim-neotest/neotest",
       dependencies = {
+        "nvim-neotest/nvim-nio",
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
-
+        -- plugins
+        "nvim-neotest/neotest-go",
         "jfpedroza/neotest-elixir",
         "rouge8/neotest-rust",
       }
@@ -146,20 +148,16 @@ require("lazy").setup({
 
       {'machakann/vim-highlightedyank'},
 
-      -- LSP / Language Server Protocol
-      {
-      'neovim/nvim-lspconfig',
-      'williamboman/nvim-lsp-installer',
-    },
-
     {
         'nvimdev/lspsaga.nvim',
         config = function()
             require('lspsaga').setup({
-
               symbol_in_winbar = {
                 enable = false,
               },
+              code_action = {
+                lightbulb = { enable = false }
+              }
             })
         end,
         dependencies = {
@@ -184,16 +182,17 @@ require("lazy").setup({
     -- Used to display LSP status in Lualine
     {'nvim-lua/lsp-status.nvim'},
 
-    -- null-ls for a collection of LSP-like plugins
     {
-        "jose-elias-alvarez/null-ls.nvim",
-        config = function()
-            require("null-ls").setup()
-        end,
-        dependencies = { "nvim-lua/plenary.nvim" },
+      "hedyhli/outline.nvim",
+      lazy = true,
+      cmd = { "Outline", "OutlineOpen" },
+      keys = { -- Example mapping to toggle outline
+        { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+      },
+      opts = {
+        -- Your setup opts here
+      },
     },
-
-    {'simrat39/symbols-outline.nvim', config=true},
     {
       'numToStr/Comment.nvim',
       config = function()
@@ -218,7 +217,6 @@ require("lazy").setup({
     },
 
     {'numToStr/FTerm.nvim'},
-    {'theprimeagen/git-worktree.nvim'},
     {'theprimeagen/harpoon'},
 
     -- Debugging
@@ -229,39 +227,14 @@ require("lazy").setup({
 
     -- => Language Support
     {'rust-lang/rust.vim'},
-    {'simrat39/rust-tools.nvim'},
     {
-      "elixir-tools/elixir-tools.nvim",
-      version = "*",
-      event = { "BufReadPre", "BufNewFile" },
-      config = function()
-        local elixir = require("elixir")
-        local elixirls = require("elixir.elixirls")
---
-        elixir.setup {
-          nextls = {enable = false},
-          credo = {},
-          elixirls = {
-            enable = true,
-            settings = elixirls.settings {
-              dialyzerEnabled = false,
-              enableTestLenses = true,
-            },
-            on_attach = function()
-              vim.keymap.set("n", "<space>fp", ":ElixirFromPipe<cr>", { buffer = true, noremap = true })
-              vim.keymap.set("n", "<space>tp", ":ElixirToPipe<cr>", { buffer = true, noremap = true })
-              vim.keymap.set("v", "<space>em", ":ElixirExpandMacro<cr>", { buffer = true, noremap = true })
-            end,
-          }
-        }
-      end,
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-      },
+      'mrcjkb/rustaceanvim',
+      version = '^6', -- Recommended
+      lazy = false, -- This plugin is already lazy
     },
     {'tpope/vim-projectionist'},
+
     -- themes & colorschemes
-    -- {'gruvbox-community/gruvbox'},
     { "rose-pine/neovim", name = "rose-pine" },
     {'luisiacc/gruvbox-baby'},
     {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',

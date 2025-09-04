@@ -83,13 +83,6 @@ vim.lsp.protocol.CompletionItemKind = {
 vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
 
--- LSP settings
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
-
-local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig.configs'
-
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
@@ -149,94 +142,54 @@ local on_attach = function(client, bufnr)
   lsp_status.on_attach(client, bufnr)
 end
 
-local function config(_config)
-  _config = vim.tbl_deep_extend("force", {
-    log_level = vim.lsp.protocol.MessageType.Log,
-    message_level = vim.lsp.protocol.MessageType.Log,
-    capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities()),
-    on_attach = on_attach,
-  }, _config or {})
-
-  -- Set default client capabilities plus window/workDoneProgress
-  _config.capabilities = vim.tbl_extend('keep', _config.capabilities or {}, lsp_status.capabilities)
-
-  return _config
-end
-
--- Enable the following language servers
--- local servers = { 'gopls', 'julials', 'rust_analyzer', 'pyright' }
--- for _, lsp in ipairs(servers) do
---   lspconfig[lsp].setup(config())
--- end
-
-require'lspconfig'.lua_ls.setup {
+vim.lsp.config("lua_ls", {
   settings = {
     Lua = {
       runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
+        -- Tell the language server which version of Lua you're using
+        version = "LuaJIT",
       },
       diagnostics = {
         -- Get the language server to recognize the `vim` global
-        globals = {'vim'},
+        globals = { "vim" },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
         library = vim.api.nvim_get_runtime_file("", true),
       },
-      -- Do not send telemetry data containing a randomized but unique identifier
       telemetry = {
+        -- Do not send telemetry data containing a randomized but unique identifier
         enable = false,
-      },
-    },
-  },
-}
-
-require('rust-tools').setup({
-  tools = {
-    runnables = {
-      use_telescope = true,
-    },
-    inlay_hints = {
-      auto = true,
-      parameter_hints_prefix = "",
-      other_hints_prefix = "",
-    }
-  },
-  server = {
-    on_attach = on_attach,
-    settings = {
-      ["rust-analyzer"] = {
-        checkOnSave = {
-          command = "clippy",
-        },
       },
     },
   },
 })
 
+-- Enable it
+vim.lsp.enable("lua_ls")
 
-local lexical_config = {
-  filetypes = { "elixir", "eelixir", "heex" },
-  cmd = { "/Users/fbecker/code/lexical/_build/dev/package/lexical/bin/start_lexical.sh" },
-  settings = {},
-}
-
-if not configs.lexical then
-  configs.lexical = {
-    default_config = {
-      filetypes = lexical_config.filetypes,
-      cmd = lexical_config.cmd,
-      root_dir = function(fname)
-        return lspconfig.util.root_pattern("mix.exs", ".git")(fname) or vim.loop.os_homedir()
-      end,
-      -- optional settings
-      settings = lexical_config.settings,
+vim.lsp.config('gopls', {
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gotmpl" },
+  root_markers = { "go.work", "go.mod", ".git" },
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+        shadow = true,
+      },
+      staticcheck = true,
     },
-  }
-end
+  },
+})
 
-lspconfig.lexical.setup({})
+vim.lsp.enable 'gopls'
 
-lspconfig.gleam.setup({})
+vim.lsp.config('expert', {
+  cmd = { 'expert' },
+  root_markers = { 'mix.exs', '.git' },
+  filetypes = { 'elixir', 'eelixir', 'heex' },
+})
 
+vim.lsp.enable 'expert'
+vim.lsp.enable 'gleam'

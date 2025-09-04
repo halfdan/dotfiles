@@ -11,7 +11,6 @@ else
   -- require('halfdan.globals')
   require('halfdan.keymap')
   require('halfdan.cmp')
-  -- require('halfdan.luasnip')
   require('halfdan.colorscheme')
   require('halfdan.treesitter')
   require('halfdan.telescope')
