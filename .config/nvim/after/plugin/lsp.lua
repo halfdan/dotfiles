@@ -6,10 +6,16 @@ local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local inoremap = Remap.inoremap
 
-vim.fn.sign_define("DiagnosticSignError",  {text = "", texthl = "DiagnosticSignError"})
-vim.fn.sign_define("DiagnosticSignWarn",   {text = "", texthl = "DiagnosticSignWarn"})
-vim.fn.sign_define("DiagnosticSignInfo",   {text = "", texthl = "DiagnosticSignInfo"})
--- vim.fn.sign_define("DiagnosticSignHint",   {text = "", texthl = "DiagnosticSignHint"})
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.INFO]  = "",
+    },
+  },
+})
+
 
 -- Set Default Prefix.
 -- Note: You can set a prefix per lsp server in the lv-globals.lua file
@@ -80,8 +86,13 @@ vim.lsp.protocol.CompletionItemKind = {
 
 
 -- Diagnostic keymaps
-vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', { noremap = true, silent = true })
+-- Show Lspsaga line diagnostics
+vim.keymap.set('n', '<leader>e', '<cmd>Lspsaga show_line_diagnostics<CR>', { noremap = true, silent = true })
+
+-- Send diagnostics to location list
+vim.keymap.set('n', '<leader>q', function()
+  vim.diagnostic.setloclist()
+end, { noremap = true, silent = true })
 
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -120,27 +131,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end, opts)
   end,
 })
-
-local on_attach = function(client, bufnr)
-  nnoremap("gd", "<cmd>Lspsaga peek_definition<CR>")
-  nnoremap("<leader>gd", function ()
-    vim.lsp.buf.definition()
-  end)
-  nnoremap("gD", function() vim.lsp.buf.declaration() end)
-  nnoremap("K", "<cmd>Lspsaga hover_doc<CR>")
-  nnoremap("gW", function() vim.lsp.buf.workspace_symbol() end)
-  nnoremap("<leader>vd", function() vim.diagnostic.open_float() end)
-  nnoremap("[d", "<cmd>Lspsaga diagnostic_jump_next<CR>")
-  nnoremap("]d", "<cmd>Lspsaga diagnostic_jump_prev<CR>")
-  nnoremap("<leader>ca", "<cmd>Lspsaga code_action<CR>")
-  nnoremap("gr", function() vim.lsp.buf.references() end)
-  nnoremap("<leader>rn", "<cmd>Lspsaga rename<CR>")
-  nnoremap("<leader>cl", function() vim.lsp.codelens.run() end)
-  nnoremap("<leader>fa", function() vim.lsp.buf.format{async = true} end)
-  inoremap("<C-h>", function() vim.lsp.buf.signature_help() end)
-
-  lsp_status.on_attach(client, bufnr)
-end
 
 vim.lsp.config("lua_ls", {
   settings = {
@@ -192,4 +182,3 @@ vim.lsp.config('expert', {
 })
 
 vim.lsp.enable 'expert'
-vim.lsp.enable 'gleam'

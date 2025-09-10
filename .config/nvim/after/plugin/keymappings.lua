@@ -105,15 +105,35 @@ nnoremap('<leader>a', ':A<CR>')
 -- Reload init.lua
 nnoremap('<leader>sv', ':source $MYVIMRC<CR>')
 
-nnoremap('<C-p>', ':Lspsaga diagnostic_jump_prev<CR>')
-nnoremap('<C-y>', ':Lspsaga diagnostic_jump_next<CR>')
+local builtin = require("telescope.builtin")
 
--- Harpoon
-nnoremap("<leader>m", function() require("harpoon.mark").add_file() end)
-nnoremap("<C-e>", function() require("harpoon.ui").toggle_quick_menu() end)
+nnoremap("<leader>gg", function()
+  -- builtin.live_grep()
+  require "telescope".extensions.egrepify.egrepify { sorting_strategy = 'ascending' }
+end)
 
-nnoremap("<C-h>", function() require("harpoon.ui").nav_file(1) end)
-nnoremap("<C-t>", function() require("harpoon.ui").nav_file(2) end)
-nnoremap("<C-n>", function() require("harpoon.ui").nav_file(3) end)
-nnoremap("<C-s>", function() require("harpoon.ui").nav_file(4) end)
+nnoremap("<C-p>", function()
+  builtin.find_files()
+end)
+
+nnoremap("<Leader>ff", function()
+  require('telescope').extensions.smart_open.smart_open({cwd_only = true})
+end)
+
+nnoremap("<Leader>fh", function()
+  builtin.find_files{cwd=vim.fn.expand('%:p:h')}
+end)
+
+nnoremap("<leader>gw", function()
+  builtin.grep_string { search = vim.fn.expand("<cword>") }
+end)
+
+nnoremap("<leader>fb", function()
+  builtin.buffers()
+end)
+
+nnoremap("<leader>gc", function()
+  builtin.git_branches()
+end)
+
 

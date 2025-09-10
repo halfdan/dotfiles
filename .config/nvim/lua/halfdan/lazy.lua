@@ -31,6 +31,16 @@ require("lazy").setup({
     -- Load .editorconfig files
     {'editorconfig/editorconfig-vim'},
 
+    {
+       "m4xshen/hardtime.nvim",
+       lazy = false,
+       dependencies = { "MunifTanjim/nui.nvim" },
+       opts = {},
+    },
+    {
+      "karb94/neoscroll.nvim",
+      opts = {},
+    },
     {'junegunn/vim-easy-align'},
 
     -- Goodies
@@ -56,7 +66,7 @@ require("lazy").setup({
         "nvim-treesitter/nvim-treesitter",
         "antoinemadec/FixCursorHold.nvim",
         -- plugins
-        "nvim-neotest/neotest-go",
+        "fredrikaverpil/neotest-golang",
         "jfpedroza/neotest-elixir",
         "rouge8/neotest-rust",
       }
@@ -82,8 +92,6 @@ require("lazy").setup({
         },
       })
     end},
-
-    {'preservim/tagbar'},
 
     {'f-person/git-blame.nvim'},
     -- Status Line and Bufferline
@@ -155,8 +163,8 @@ require("lazy").setup({
               symbol_in_winbar = {
                 enable = false,
               },
-              code_action = {
-                lightbulb = { enable = false }
+              lightbulb = {
+                enable = false,
               }
             })
         end,
@@ -217,7 +225,6 @@ require("lazy").setup({
     },
 
     {'numToStr/FTerm.nvim'},
-    {'theprimeagen/harpoon'},
 
     -- Debugging
     "mfussenegger/nvim-dap",

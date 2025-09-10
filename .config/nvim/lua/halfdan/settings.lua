@@ -7,8 +7,7 @@ vim.o.titlestring="%<%F%=%l/%L - nvim"
 vim.wo.wrap = false -- Display long lines as just one line
 -- vim.cmd('set whichwrap+=<,>,[,],h,l') -- move to next line with theses keys
 -- vim.cmd('syntax on') -- syntax highlighting
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldmethod = "manual"
 vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
 local fcs = vim.opt.fillchars:get()
 

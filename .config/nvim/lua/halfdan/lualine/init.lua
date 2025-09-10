@@ -28,7 +28,7 @@ local function setup()
     sections = {
       lualine_a = { cpn.branch },
       lualine_b = { cpn.diagnostics },
-      lualine_c = {},
+      lualine_c = { "lsp_status" },
       lualine_x = { { git_blame.get_current_blame_text, cond = git_blame.is_blame_text_available }, cpn.diff },
       lualine_y = { cpn.position, cpn.filetype },
       lualine_z = { cpn.spaces, cpn.mode },
