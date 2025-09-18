@@ -4,6 +4,8 @@ local daptext = require("nvim-dap-virtual-text")
 
 local remap = require("halfdan.keymap")
 local nnoremap = remap.nnoremap
+local dap = require("dap")
+local dapgo = require("dap-go")
 
 daptext.setup()
 dapui.setup({
@@ -27,18 +29,8 @@ dapui.setup({
     },
 })
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-    dapui.open(1)
-end
-dap.listeners.before.event_terminated["dapui_config"] = function()
-    dapui.close()
-end
-dap.listeners.before.event_exited["dapui_config"] = function()
-    dapui.close()
-end
-
-require("halfdan.debugger.elixir");
-
+-- Keymappings
+--
 nnoremap("<Home>", function()
     dapui.toggle(1)
 end)
@@ -74,3 +66,52 @@ end)
 nnoremap("<leader>dr", function()
     dap.repl.open()
 end)
+
+
+
+dap.listeners.after.event_initialized.dapui_config = function()
+    dapui.open(1)
+end
+dap.listeners.before.event_terminated.dapui_config = function()
+    dapui.close()
+end
+dap.listeners.before.event_exited.dapui_config = function()
+    dapui.close()
+end
+
+
+dap.adapters.mix_task = {
+  type = 'executable',
+  command = '/usr/local/opt/elixir-ls/rel/debugger.sh', -- debugger.bat for windows
+  args = {}
+}
+
+dapgo.setup()
+
+dap.configurations.elixir = {
+  {
+    type = 'mix_task',
+    name = 'mix test',
+    request = 'launch',
+    task = 'test',
+    taskArgs = { '--trace' },
+    startApps = false,
+    projectDir = "${workspaceFolder}",
+    requireFiles = { "test/**/test_helper.exs", "test/**/*_test.exs" }
+  },
+  {
+    name = "mix test focused",
+    type = "mix_task",
+    request = "launch",
+    taskArgs = {
+      "${relativeFile}:${lineNumber}",
+      "--color",
+      "--trace"
+    },
+    projectDir = "${workspaceRoot}",
+    requireFiles = {
+      "test/**/test_helper.exs",
+      "test/**/*_test.exs"
+    }
+  }
+}
