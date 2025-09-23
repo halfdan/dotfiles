@@ -10,7 +10,7 @@ else
   require("halfdan.neogit")
   -- require('halfdan.globals')
   require('halfdan.keymap')
-  require('halfdan.cmp')
+  -- require('halfdan.cmp')
   require('halfdan.colorscheme')
   require('halfdan.treesitter')
   require('halfdan.telescope')

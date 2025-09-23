@@ -9,5 +9,6 @@
         "language": "lua",
         "path": "./snippets/lua.json"
       }
+]
   }
 }

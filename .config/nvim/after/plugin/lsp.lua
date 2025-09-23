@@ -2,56 +2,39 @@ if vim.g.vscode then
   return
 end
 
-local Remap = require("halfdan.keymap")
-local nnoremap = Remap.nnoremap
-local inoremap = Remap.inoremap
+
 
 vim.diagnostic.config({
+  underline = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "",
-      [vim.diagnostic.severity.WARN]  = "",
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN]  = "",
       [vim.diagnostic.severity.INFO]  = "",
+      [vim.diagnostic.severity.HINT]  = "", -- optional, you can pick any icon
     },
   },
+  virtual_text = true, -- or { prefix = "●" } for customization
+  update_in_insert = false,
+  severity_sort = true,
 })
-
-
--- Set Default Prefix.
--- Note: You can set a prefix per lsp server in the lv-globals.lua file
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    signs = true,
-    underline = true,
-  }
-)
 
 -- Setup for nvim-notify
 vim.lsp.set_log_level(2)
-
-local convert_lsp_log_level_to_neovim_log_level = function(lsp_log_level)
-  if lsp_log_level == 1 then
-    return 4
-  elseif lsp_log_level == 2 then
-    return 3
-  elseif lsp_log_level == 3 then
-    return 2
-  elseif lsp_log_level == 4 then
-    return 1
-  end
-end
-
-local levels = {
-  "ERROR",
-  "WARN",
-  "INFO",
-  "DEBUG",
-  [0] = "TRACE",
+-- Map LSP message types (1=Error, 2=Warning, 3=Info, 4=Log) to vim.log.levels
+local severity_map = {
+  [1] = vim.log.levels.ERROR,
+  [2] = vim.log.levels.WARN,
+  [3] = vim.log.levels.INFO,
+  [4] = vim.log.levels.DEBUG,
 }
----@diagnostic disable-next-line: unused-vararg
-vim.lsp.handlers["window/showMessage"] = function(_, result, ...)
-  if require("vim.lsp.log").should_log(convert_lsp_log_level_to_neovim_log_level(result.type)) then
-    vim.notify(result.message, levels[result.type])
+
+vim.lsp.handlers["window/showMessage"] = function(_, result, ctx, _)
+  local lvl = severity_map[result.type] or vim.log.levels.INFO
+  if vim.lsp.log.should_log(lvl) then
+    local client = vim.lsp.get_client_by_id(ctx.client_id)
+    local title = client and ("LSP | " .. client.name) or "LSP"
+    vim.notify(result.message, lvl, { title = title })
   end
 end
 
@@ -97,8 +80,13 @@ end, { noremap = true, silent = true })
 -- Global mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+vim.keymap.set('n', ']d', function()
+  vim.diagnostic.jump_next()
+end, { desc = "Go to next diagnostic" })
+
+vim.keymap.set('n', '[d', function()
+  vim.diagnostic.jump_prev()
+end, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
 -- Use LspAttach autocommand to only map the following keys
@@ -155,8 +143,26 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+
 -- Enable it
-vim.lsp.enable("lua_ls")
+local neodev = require("neodev")
+
+-- must run before enabling lua_ls
+neodev.setup({})
+
+vim.lsp.config("lua_ls", {
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      diagnostics = { globals = { "vim" } },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+        checkThirdParty = false,
+      },
+      telemetry = { enable = false },
+    },
+  },
+})
 
 vim.lsp.config('gopls', {
   cmd = { "gopls" },
@@ -173,6 +179,7 @@ vim.lsp.config('gopls', {
   },
 })
 
+vim.lsp.enable 'lua_ls'
 vim.lsp.enable 'gopls'
 
 vim.lsp.config('expert', {

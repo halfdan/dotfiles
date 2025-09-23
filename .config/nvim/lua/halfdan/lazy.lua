@@ -16,305 +16,361 @@ if vim.g.vscode then
 end
 
 require("lazy").setup({
-    {
-      "NeogitOrg/neogit",
-      dependencies = {
-        "nvim-lua/plenary.nvim",         -- required
-        "nvim-telescope/telescope.nvim", -- optional
-        "sindrets/diffview.nvim",        -- optional
-        "ibhagwan/fzf-lua",              -- optional
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- required
+      "nvim-telescope/telescope.nvim", -- optional
+      "sindrets/diffview.nvim",        -- optional
+      "ibhagwan/fzf-lua",              -- optional
+    },
+    config = true
+  },
+  {'airblade/vim-gitgutter'},
+
+  -- Load .editorconfig files
+  {'editorconfig/editorconfig-vim'},
+
+  {
+    "m4xshen/hardtime.nvim",
+    lazy = false,
+    dependencies = { "MunifTanjim/nui.nvim" },
+    opts = {},
+  },
+  {
+    "karb94/neoscroll.nvim",
+    opts = {},
+  },
+  {'junegunn/vim-easy-align'},
+
+  -- Goodies
+  {'tpope/vim-fugitive'},
+  {'tpope/vim-surround'}, -- ✅
+  {'tpope/vim-dispatch'},
+
+  -- Treesitter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    branch = 'main',
+    build = ':TSUpdate',
+  },
+
+  -- Testing
+  {'vim-test/vim-test'},
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      -- plugins
+      "fredrikaverpil/neotest-golang",
+      "jfpedroza/neotest-elixir",
+      "rouge8/neotest-rust",
+    }
+  },
+  {"nvim-neotest/neotest-vim-test" },
+  {'akinsho/toggleterm.nvim', version = "*", config = function()
+    require('toggleterm').setup({
+      open_mapping = [[<C-\>]],
+      start_in_insert = true,
+      direction = "horizontal",
+      autochdir = false,
+      size = 20,
+      highlights = {
+        FloatBorder = { link = "ToggleTermBorder" },
+        Normal = { link = "ToggleTerm" },
+        NormalFloat = { link = "ToggleTerm" },
       },
-      config = true
-    },
-    {'airblade/vim-gitgutter'},
+      winbar = {
+        enabled = true,
+        name_formatter = function(term)
+          return term.name
+        end,
+      },
+    })
+  end},
 
-    -- Load .editorconfig files
-    {'editorconfig/editorconfig-vim'},
-
-    {
-       "m4xshen/hardtime.nvim",
-       lazy = false,
-       dependencies = { "MunifTanjim/nui.nvim" },
-       opts = {},
-    },
-    {
-      "karb94/neoscroll.nvim",
-      opts = {},
-    },
-    {'junegunn/vim-easy-align'},
-
-    -- Goodies
-    {'tpope/vim-fugitive'},
-    {'tpope/vim-surround'}, -- ✅
-    {'tpope/vim-dispatch'},
-
-    -- Treesitter
-    {
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-    },
-    { 'nvim-treesitter/playground', after = 'nvim-treesitter' },
-    { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
-
-    -- Testing
-    {'vim-test/vim-test'},
-    {
-      "nvim-neotest/neotest",
-      dependencies = {
-        "nvim-neotest/nvim-nio",
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-        "antoinemadec/FixCursorHold.nvim",
-        -- plugins
-        "fredrikaverpil/neotest-golang",
-        "jfpedroza/neotest-elixir",
-        "rouge8/neotest-rust",
+  {'f-person/git-blame.nvim'},
+  -- Status Line and Bufferline
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = {'kyazdani42/nvim-web-devicons'},
+    event = { "BufReadPost", "BufNewFile" },
+    opts = function()
+      local monokai_opts = require("halfdan.util").opts("monokai-pro.nvim")
+      return {
+        float = vim.tbl_contains(monokai_opts.background_clear or {}, "neo-tree"),
+        separator = "bubble", -- bubble | triangle
+        ---@type any
+        colorful = true,
       }
-    },
-    {"nvim-neotest/neotest-vim-test" },
-    {'akinsho/toggleterm.nvim', version = "*", config = function()
-      require('toggleterm').setup({
-        open_mapping = [[<C-\>]],
-        start_in_insert = true,
-        direction = "horizontal",
-        autochdir = false,
-        size = 20,
-        highlights = {
-          FloatBorder = { link = "ToggleTermBorder" },
-          Normal = { link = "ToggleTerm" },
-          NormalFloat = { link = "ToggleTerm" },
-        },
-        winbar = {
-          enabled = true,
-          name_formatter = function(term)
-            return term.name
-          end,
-        },
-      })
-    end},
+    end,
+    config = function(_, opts)
+      local lualine_config = require("halfdan.lualine")
+      lualine_config.setup(opts)
+      lualine_config.load()
+    end,
+  },
 
-    {'f-person/git-blame.nvim'},
-    -- Status Line and Bufferline
-    {
-      'nvim-lualine/lualine.nvim',
-      dependencies = {'kyazdani42/nvim-web-devicons'},
-      event = { "BufReadPost", "BufNewFile" },
-      opts = function()
-        local monokai_opts = require("halfdan.util").opts("monokai-pro.nvim")
-        return {
-          float = vim.tbl_contains(monokai_opts.background_clear or {}, "neo-tree"),
-          separator = "bubble", -- bubble | triangle
-          ---@type any
-          colorful = true,
-        }
-      end,
-      config = function(_, opts)
-        local lualine_config = require("halfdan.lualine")
-        lualine_config.setup(opts)
-        lualine_config.load()
-        end,
-      },
+  {'rcarriga/nvim-notify'},
 
-      {'rcarriga/nvim-notify'},
-
-      {
-          "nvim-neorg/neorg",
-          lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-          version = "*", -- Pin Neorg to the latest stable release
-          config = function()
-            require('neorg').setup({
-              load = {
-                ["core.defaults"] = {},
-                ["core.dirman"] = {
-                  config = {
-                    workspaces = {
-                      work = "~/org/work",
-                      home = "~/org/home",
-                    },
-                    index = "index.norg",
-                  }
-                },
-                ["core.completion"] = {
-                  config = {
-                    engine = "nvim-cmp",
-                  },
-                },
-                ["core.concealer"] = {},
-                ["core.journal"] = {
-                  config = {
-                    strategy = "flat",
-                  },
-                },
-                ["core.integrations.telescope"] = {},
-              }
-            })
-        end,
-      },
-      {'nvim-neorg/neorg-telescope'},
-
-      {'justinmk/vim-sneak'},
-
-      {'machakann/vim-highlightedyank'},
-
-    {
-        'nvimdev/lspsaga.nvim',
-        config = function()
-            require('lspsaga').setup({
-              symbol_in_winbar = {
-                enable = false,
+  {
+    "nvim-neorg/neorg",
+    lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
+    version = "*", -- Pin Neorg to the latest stable release
+    config = function()
+      require('neorg').setup({
+        load = {
+          ["core.defaults"] = {},
+          ["core.dirman"] = {
+            config = {
+              workspaces = {
+                work = "~/org/work",
+                home = "~/org/home",
               },
-              lightbulb = {
-                enable = false,
-              }
-            })
-        end,
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter', -- optional
-            'nvim-tree/nvim-web-devicons'     -- optional
-        }
-    },
-
-    {
-      'hrsh7th/nvim-cmp',
-      dependencies = {
-        { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
-        'hrsh7th/cmp-nvim-lsp',
-        'onsails/lspkind.nvim',
-        { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
-        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', event = 'CmdlineEnter' },
-        {'petertriho/cmp-git', after = 'nvim-cmp'},
-      }
-    },
-
-    -- Used to display LSP status in Lualine
-    {'nvim-lua/lsp-status.nvim'},
-
-    {
-      "hedyhli/outline.nvim",
-      lazy = true,
-      cmd = { "Outline", "OutlineOpen" },
-      keys = { -- Example mapping to toggle outline
-        { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
-      },
-      opts = {
-        -- Your setup opts here
-      },
-    },
-    {
-      'numToStr/Comment.nvim',
-      config = function()
-        require('Comment').setup()
-      end
-    },
-
-    -- Telescope fuzzy find files/grep
-    {'nvim-lua/popup.nvim'},
-    {'nvim-lua/plenary.nvim'},
-    {
-        "fdschmidt93/telescope-egrepify.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-    },
-    {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    {'nvim-telescope/telescope.nvim'},
-    {'nvim-telescope/telescope-dap.nvim'},
-    {
-      "danielfalk/smart-open.nvim",
-      branch = "0.2.x",
-      dependencies = {"kkharji/sqlite.lua"}
-    },
-
-    {'numToStr/FTerm.nvim'},
-
-    -- Debugging
-    "mfussenegger/nvim-dap",
-    "rcarriga/nvim-dap-ui",
-    "nvim-neotest/nvim-nio",
-    "theHamsta/nvim-dap-virtual-text",
-    "leoluz/nvim-dap-go",
-
-    -- => Language Support
-    {'rust-lang/rust.vim'},
-    {
-      'mrcjkb/rustaceanvim',
-      version = '^6', -- Recommended
-      lazy = false, -- This plugin is already lazy
-    },
-    {'tpope/vim-projectionist'},
-
-    -- themes & colorschemes
-    { "rose-pine/neovim", name = "rose-pine" },
-    {'luisiacc/gruvbox-baby'},
-    {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',
-      keys = {
-        { "<C-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Go to buffer 1" },
-        { "<C-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "Go to buffer 2" },
-        { "<C-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "Go to buffer 3" },
-        { "<C-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "Go to buffer 4" },
-        { "<C-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "Go to buffer 5" },
-        { "<C-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "Go to buffer 6" },
-        { "<C-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "Go to buffer 7" },
-        { "<C-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "Go to buffer 8" },
-        { "<C-9>", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "Go to buffer 9" },
-        { "<S-l>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
-        { "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous buffer" },
-        { "<A-S-l>", "<Cmd>BufferLineMoveNext<CR>", desc = "Move buffer right" },
-        { "<A-S-h>", "<Cmd>BufferLineMovePrev<CR>", desc = "Move buffer left" },
-      },
-      opts = function()
-        local monokai_opts = require("halfdan.util").opts("monokai-pro.nvim")
-        return {
-          options = {
-            diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
-            -- separator_style = "", -- | "thick" | "thin" | "slope" | { 'any', 'any' },
-            separator_style = { "", "" }, -- | "thick" | "thin" | { 'any', 'any' },
-            -- separator_style = "slant", -- | "thick" | "thin" | { 'any', 'any' },
-            indicator = {
-              -- icon = " ",
-              -- style = 'icon',
-              style = "underline",
-            },
-            close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-            diagnostics_indicator = function(count, _, _, _)
-              if count > 9 then
-                return "9+"
-              end
-              return tostring(count)
-            end,
-            numbers = function(opts)
-              return string.format('%s', opts.raise(opts.ordinal))
-            end,
-            offsets = {
-              {
-                filetype = "neo-tree",
-                text = "EXPLORER",
-                text_align = "center",
-                separator = vim.tbl_contains(monokai_opts.background_clear or {}, "neo-tree"), -- set to `true` if clear background of neo-tree
-              },
-              {
-                filetype = "NvimTree",
-                text = "EXPLORER",
-                text_align = "center",
-                separator = vim.tbl_contains(monokai_opts.background_clear or {}, "nvim-tree"), -- set to `true` if clear background of neo-tree
-              },
-            },
-            hover = {
-              enabled = true,
-              delay = 0,
-              reveal = { "close" },
+              index = "index.norg",
+            }
+          },
+          -- ["core.completion"] = {
+          --   config = {
+          --     engine = "nvim-cmp",
+          --   },
+          -- },
+          ["core.concealer"] = {},
+          ["core.journal"] = {
+            config = {
+              strategy = "flat",
             },
           },
+          ["core.integrations.telescope"] = {},
         }
-      end,
-    },
-    {
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-        -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-      }
+      })
+    end,
+  },
+  {'nvim-neorg/neorg-telescope'},
+
+  {'justinmk/vim-sneak'},
+
+  {'machakann/vim-highlightedyank'},
+
+  {
+    'nvimdev/lspsaga.nvim',
+    config = function()
+      require('lspsaga').setup({
+        symbol_in_winbar = {
+          enable = false,
+        },
+        lightbulb = {
+          enable = false,
+        }
+      })
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter', -- optional
+      'nvim-tree/nvim-web-devicons'     -- optional
     }
+  },
+
+  -- {
+  --   'hrsh7th/nvim-cmp',
+  --   dependencies = {
+  --     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+  --     'hrsh7th/cmp-nvim-lsp',
+  --     'onsails/lspkind.nvim',
+  --     { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+  --     { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+  --     { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp', event = 'CmdlineEnter' },
+  --     {'petertriho/cmp-git', after = 'nvim-cmp'},
+  --   }
+  -- },
+  {
+    'saghen/blink.cmp',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    version = '1.*',
+    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
+
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+      -- 'super-tab' for mappings similar to vscode (tab to accept)
+      -- 'enter' for enter to accept
+      -- 'none' for no mappings
+      --
+      -- All presets have the following mappings:
+      -- C-space: Open menu or open docs if already open
+      -- C-n/C-p or Up/Down: Select next/previous item
+      -- C-e: Hide menu
+      -- C-k: Toggle signature help (if signature.enabled = true)
+      --
+      -- See :h blink-cmp-config-keymap for defining your own keymap
+      keymap = { preset = 'super-tab' },
+
+      appearance = {
+        -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+        -- Adjusts spacing to ensure icons are aligned
+        nerd_font_variant = 'mono'
+      },
+
+      -- (Default) Only show the documentation popup when manually triggered
+      completion = { documentation = { auto_show = false } },
+
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = { 'lsp', 'path', 'snippets', 'buffer' },
+      },
+
+      -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+      -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+      -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+      --
+      -- See the fuzzy documentation for more information
+      fuzzy = { implementation = "prefer_rust" }
+    },
+    opts_extend = { "sources.default" }
+  },
+
+  -- Used to display LSP status in Lualine
+  {'nvim-lua/lsp-status.nvim'},
+
+  {
+    "hedyhli/outline.nvim",
+    lazy = true,
+    cmd = { "Outline", "OutlineOpen" },
+    keys = { -- Example mapping to toggle outline
+      { "<leader>o", "<cmd>Outline<CR>", desc = "Toggle outline" },
+    },
+    opts = {
+      -- Your setup opts here
+    },
+  },
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  },
+
+  -- Telescope fuzzy find files/grep
+  {'nvim-lua/popup.nvim'},
+  {'nvim-lua/plenary.nvim'},
+  {
+    "fdschmidt93/telescope-egrepify.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
+  {'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  {'nvim-telescope/telescope.nvim'},
+  {'nvim-telescope/telescope-dap.nvim'},
+  {
+    "danielfalk/smart-open.nvim",
+    branch = "0.2.x",
+    dependencies = {"kkharji/sqlite.lua"}
+  },
+
+  {'numToStr/FTerm.nvim'},
+
+  -- Debugging
+  "mfussenegger/nvim-dap",
+  "rcarriga/nvim-dap-ui",
+  "nvim-neotest/nvim-nio",
+  "theHamsta/nvim-dap-virtual-text",
+  "leoluz/nvim-dap-go",
+
+  -- => Language Support
+  {
+    "folke/neodev.nvim",
+    config = function()
+      require("neodev").setup({})
+    end
+  },
+  {'neovim/nvim-lspconfig'},
+  {'rust-lang/rust.vim'},
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
+  {'tpope/vim-projectionist'},
+
+  -- themes & colorschemes
+  { "rose-pine/neovim", name = "rose-pine" },
+  {'luisiacc/gruvbox-baby'},
+  {'akinsho/bufferline.nvim', version = "*", dependencies = 'nvim-tree/nvim-web-devicons',
+    keys = {
+      { "<C-1>", "<Cmd>BufferLineGoToBuffer 1<CR>", desc = "Go to buffer 1" },
+      { "<C-2>", "<Cmd>BufferLineGoToBuffer 2<CR>", desc = "Go to buffer 2" },
+      { "<C-3>", "<Cmd>BufferLineGoToBuffer 3<CR>", desc = "Go to buffer 3" },
+      { "<C-4>", "<Cmd>BufferLineGoToBuffer 4<CR>", desc = "Go to buffer 4" },
+      { "<C-5>", "<Cmd>BufferLineGoToBuffer 5<CR>", desc = "Go to buffer 5" },
+      { "<C-6>", "<Cmd>BufferLineGoToBuffer 6<CR>", desc = "Go to buffer 6" },
+      { "<C-7>", "<Cmd>BufferLineGoToBuffer 7<CR>", desc = "Go to buffer 7" },
+      { "<C-8>", "<Cmd>BufferLineGoToBuffer 8<CR>", desc = "Go to buffer 8" },
+      { "<C-9>", "<Cmd>BufferLineGoToBuffer 9<CR>", desc = "Go to buffer 9" },
+      { "<S-l>", "<Cmd>BufferLineCycleNext<CR>", desc = "Next buffer" },
+      { "<S-h>", "<Cmd>BufferLineCyclePrev<CR>", desc = "Previous buffer" },
+      { "<A-S-l>", "<Cmd>BufferLineMoveNext<CR>", desc = "Move buffer right" },
+      { "<A-S-h>", "<Cmd>BufferLineMovePrev<CR>", desc = "Move buffer left" },
+    },
+    opts = function()
+      local monokai_opts = require("halfdan.util").opts("monokai-pro.nvim")
+      return {
+        options = {
+          diagnostics = "nvim_lsp", -- | "nvim_lsp" | "coc",
+          -- separator_style = "", -- | "thick" | "thin" | "slope" | { 'any', 'any' },
+          separator_style = { "", "" }, -- | "thick" | "thin" | { 'any', 'any' },
+          -- separator_style = "slant", -- | "thick" | "thin" | { 'any', 'any' },
+          indicator = {
+            -- icon = " ",
+            -- style = 'icon',
+            style = "underline",
+          },
+          close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+          diagnostics_indicator = function(count, _, _, _)
+            if count > 9 then
+              return "9+"
+            end
+            return tostring(count)
+          end,
+          numbers = function(opts)
+            return string.format('%s', opts.raise(opts.ordinal))
+          end,
+          offsets = {
+            {
+              filetype = "neo-tree",
+              text = "EXPLORER",
+              text_align = "center",
+              separator = vim.tbl_contains(monokai_opts.background_clear or {}, "neo-tree"), -- set to `true` if clear background of neo-tree
+            },
+            {
+              filetype = "NvimTree",
+              text = "EXPLORER",
+              text_align = "center",
+              separator = vim.tbl_contains(monokai_opts.background_clear or {}, "nvim-tree"), -- set to `true` if clear background of neo-tree
+            },
+          },
+          hover = {
+            enabled = true,
+            delay = 0,
+            reveal = { "close" },
+          },
+        },
+      }
+    end,
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    }
+  }
 })

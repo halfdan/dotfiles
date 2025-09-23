@@ -2,7 +2,7 @@ if vim.g.vscode then
   return
 end
 
-require('nvim-treesitter.configs').setup({
+require('nvim-treesitter').setup({
   ensure_installed = { "python", "go", "elixir", "heex", "rust", "gomod", "json", "lua", "yaml", "norg", "query", "markdown", "markdown_inline", "gleam", "zig", "odin"},
   ignore_install = { "haskell" },
   highlight = {
