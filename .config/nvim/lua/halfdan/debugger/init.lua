@@ -1,4 +1,3 @@
-local dap = require("dap")
 local dapui = require("dapui")
 local daptext = require("nvim-dap-virtual-text")
 
@@ -81,37 +80,37 @@ end
 
 
 dap.adapters.mix_task = {
-  type = 'executable',
-  command = '/usr/local/opt/elixir-ls/rel/debugger.sh', -- debugger.bat for windows
-  args = {}
+    type = 'executable',
+    command = '/usr/local/opt/elixir-ls/rel/debugger.sh', -- debugger.bat for windows
+    args = {}
 }
 
 dapgo.setup()
 
 dap.configurations.elixir = {
-  {
-    type = 'mix_task',
-    name = 'mix test',
-    request = 'launch',
-    task = 'test',
-    taskArgs = { '--trace' },
-    startApps = false,
-    projectDir = "${workspaceFolder}",
-    requireFiles = { "test/**/test_helper.exs", "test/**/*_test.exs" }
-  },
-  {
-    name = "mix test focused",
-    type = "mix_task",
-    request = "launch",
-    taskArgs = {
-      "${relativeFile}:${lineNumber}",
-      "--color",
-      "--trace"
+    {
+        type = 'mix_task',
+        name = 'mix test',
+        request = 'launch',
+        task = 'test',
+        taskArgs = { '--trace' },
+        startApps = false,
+        projectDir = "${workspaceFolder}",
+        requireFiles = { "test/**/test_helper.exs", "test/**/*_test.exs" }
     },
-    projectDir = "${workspaceRoot}",
-    requireFiles = {
-      "test/**/test_helper.exs",
-      "test/**/*_test.exs"
+    {
+        name = "mix test focused",
+        type = "mix_task",
+        request = "launch",
+        taskArgs = {
+            "${relativeFile}:${lineNumber}",
+            "--color",
+            "--trace"
+        },
+        projectDir = "${workspaceRoot}",
+        requireFiles = {
+            "test/**/test_helper.exs",
+            "test/**/*_test.exs"
+        }
     }
-  }
 }

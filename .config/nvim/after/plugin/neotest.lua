@@ -16,18 +16,7 @@ vim.diagnostic.config({
   },
 }, neotest_ns)
 
-neotest.setup({
-  log_level = vim.log.levels.DEBUG,
-  adapters = {
-    require("neotest-elixir")({
-      args = { "--trace" },
-      write_delay = 0,
-    }),
-    require("neotest-rust"),
-    --    require("neotest-vim-test")({ allow_file_types = { "haskell"} }),
-    require("neotest-golang")
-  },
-})
+
 
 nnoremap("<leader>nt", function()
   neotest.run.run()

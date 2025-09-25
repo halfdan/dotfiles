@@ -1,11 +1,9 @@
-
 local Remap = require("halfdan.keymap")
 local nnoremap = Remap.nnoremap
 local vnoremap = Remap.vnoremap
 local inoremap = Remap.inoremap
 local tnoremap = Remap.tnoremap
 local xnoremap = Remap.xnoremap
-local nmap = Remap.nmap
 
 -- Yank until end of line
 nnoremap('Y', 'yg$')
@@ -44,13 +42,13 @@ nnoremap("<leader>/", ":split<CR>")
 
 -- Keybindings below this are neovim cli only
 if vim.g.vscode then
-  -- Toggle Comment
-  vim.keymap.set('x', 'gc', '<Plug>VSCodeCommentary', {})
-  vim.keymap.set('n', 'gc', '<Plug>VSCodeCommentary', {})
-  vim.keymap.set('o', 'gc', '<Plug>VSCodeCommentary', {})
-  vim.keymap.set('n', 'gcc', '<Plug>VSCodeCommentaryLine', {})
+    -- Toggle Comment
+    vim.keymap.set('x', 'gc', '<Plug>VSCodeCommentary', {})
+    vim.keymap.set('n', 'gc', '<Plug>VSCodeCommentary', {})
+    vim.keymap.set('o', 'gc', '<Plug>VSCodeCommentary', {})
+    vim.keymap.set('n', 'gcc', '<Plug>VSCodeCommentaryLine', {})
 
-  return
+    return
 end
 
 tnoremap('<ESC>', '<C-\\><C-n>')
@@ -108,32 +106,49 @@ nnoremap('<leader>sv', ':source $MYVIMRC<CR>')
 local builtin = require("telescope.builtin")
 
 nnoremap("<leader>gg", function()
-  -- builtin.live_grep()
-  require "telescope".extensions.egrepify.egrepify { sorting_strategy = 'ascending' }
+    require "telescope".extensions.egrepify.egrepify { sorting_strategy = 'ascending' }
+end)
+
+nnoremap("<leader>gs", function()
+    require('neogit').open({ kind = 'split' })
 end)
 
 nnoremap("<C-p>", function()
-  builtin.find_files()
+    builtin.find_files()
 end)
 
 nnoremap("<Leader>ff", function()
-  require('telescope').extensions.smart_open.smart_open({cwd_only = true})
+    require('telescope').extensions.smart_open.smart_open({ cwd_only = true })
 end)
 
 nnoremap("<Leader>fh", function()
-  builtin.find_files{cwd=vim.fn.expand('%:p:h')}
+    builtin.find_files { cwd = vim.fn.expand('%:p:h') }
 end)
 
 nnoremap("<leader>gw", function()
-  builtin.grep_string { search = vim.fn.expand("<cword>") }
+    builtin.grep_string { search = vim.fn.expand("<cword>") }
 end)
 
 nnoremap("<leader>fb", function()
-  builtin.buffers()
+    builtin.buffers()
 end)
 
 nnoremap("<leader>gc", function()
-  builtin.git_branches()
+    builtin.git_branches()
 end)
 
+nnoremap("<leader>nt", function()
+    require("neotest").run.run()
+end)
 
+nnoremap("<leader>nf", function()
+    require("neotest").run.run(vim.fn.expand("%"))
+end)
+
+nnoremap("<leader>nd", function()
+    require("neotest").run.run({ strategy = "dap" })
+end)
+
+nnoremap("<leader>ns", function()
+    require("neotest").summary.toggle()
+end)
