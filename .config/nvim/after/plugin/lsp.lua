@@ -79,11 +79,11 @@ end, { noremap = true, silent = true })
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
 vim.keymap.set('n', ']d', function()
-    vim.diagnostic.goto_next()
+    vim.diagnostic.jump({count=1, float=true})
 end, { desc = "Go to next diagnostic" })
 
 vim.keymap.set('n', '[d', function()
-    vim.diagnostic.goto_prev()
+    vim.diagnostic.jump({count=-1, float=true})
 end, { desc = "Go to previous diagnostic" })
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 
@@ -117,73 +117,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end, opts)
     end,
 })
-
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using
-                version = "LuaJIT",
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = { "vim" },
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = {
-                -- Do not send telemetry data containing a randomized but unique identifier
-                enable = false,
-            },
-        },
-    },
-})
-
-
--- Enable it
-local neodev = require("neodev")
-
--- must run before enabling lua_ls
-neodev.setup({})
-
-vim.lsp.config("lua_ls", {
-    settings = {
-        Lua = {
-            runtime = { version = "LuaJIT" },
-            diagnostics = { globals = { "vim" } },
-            workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
-                checkThirdParty = false,
-            },
-            telemetry = { enable = false },
-        },
-    },
-})
-
-vim.lsp.config('gopls', {
-    cmd = { "gopls" },
-    filetypes = { "go", "gomod", "gowork", "gotmpl" },
-    root_markers = { "go.work", "go.mod", ".git" },
-    settings = {
-        gopls = {
-            analyses = {
-                unusedparams = true,
-                shadow = true,
-            },
-            staticcheck = true,
-        },
-    },
-})
-
 vim.lsp.enable 'lua_ls'
 vim.lsp.enable 'gopls'
-
-vim.lsp.config('expert', {
-    cmd = { 'expert' },
-    root_markers = { 'mix.exs', '.git' },
-    filetypes = { 'elixir', 'eelixir', 'heex' },
-})
-
 vim.lsp.enable 'expert'
+vim.lsp.enable 'ruff'
+vim.lsp.enable 'pyright'
