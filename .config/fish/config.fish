@@ -33,3 +33,5 @@ end
 function mix_test_changed
   git status -s | awk '{print $2}' | grep '_test.exs' | xargs mix test
 end
+
+~/.local/bin/mise activate fish | source
