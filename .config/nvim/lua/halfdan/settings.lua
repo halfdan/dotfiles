@@ -57,6 +57,7 @@ vim.b.did_ftplugin = 1
 -- vim.g.gruvbox_baby_background_color = "dark"
 
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 vim.g.netrw_preview = 1 -- Split preview vertically
 vim.g.netrw_alo = 1 -- Show preview window to the right

@@ -2,7 +2,7 @@ return {
     {
         "nvim-neorg/neorg",
         lazy = false, -- Disable lazy loading as some `lazy.nvim` distributions set `lazy = true` by default
-        version = "*", -- Pin Neorg to the latest stable release
+        version = "4da2159b3f3420d43613f43e159f4253b8544474", -- Pin Neorg to the latest stable release
         config = function()
             require('neorg').setup({
                 load = {
@@ -26,6 +26,11 @@ return {
                         },
                     },
                     ["core.integrations.telescope"] = {},
+                    ["core.keybinds"] = {
+                        config = {
+                            default_keybinds = true,
+                        },
+                    },
                     ["external.interim-ls"] = {
                       config = {
                           -- default config shown

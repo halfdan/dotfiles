@@ -11,10 +11,10 @@ abbr -a -- gca 'git commit --amend'
 abbr -a -- gpf 'git push -f'
 abbr -a -- gp 'git push'
 abbr -a -- gl 'git pull'
-abbr -a -- gl 'git rebase develop'
-abbr -a -- gcd 'git checkout develop'
+abbr -a -- gcm 'git checkout main'
 abbr -a -- gc- 'git checkout -'
 abbr -a -- gc 'git checkout'
+abbr -a -- gau 'git add -u'
 
 abbr -a -- api 'kubectl get pods -n backend | fzf | awk \'{print $1}\' | xargs -o -I {} kubectl exec -i -t -n backend {} --container api -- /opt/app/api/bin/api remote'
 
