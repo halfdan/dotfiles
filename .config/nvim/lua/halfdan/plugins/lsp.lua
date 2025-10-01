@@ -32,4 +32,8 @@ return {
     },
     -- Used to display LSP status in Lualine
     { 'nvim-lua/lsp-status.nvim' },
+    {
+      'daliusd/incr.nvim',
+      config = true,
+    }
 }

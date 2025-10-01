@@ -68,9 +68,9 @@ vim.cmd([[
     noremap <silent> <C-Down> :resize -3<CR>
 ]])
 
--- Tab switch buffer
-nnoremap('<TAB>', ':bnext<CR>')
-nnoremap('<S-TAB>', ':bprevious<CR>')
+-- -- Tab switch buffer
+-- nnoremap('<TAB>', ':bnext<CR>')
+-- nnoremap('<S-TAB>', ':bprevious<CR>')
 
 -- Quickfix list
 nnoremap('[q', ':cprev<CR>')
